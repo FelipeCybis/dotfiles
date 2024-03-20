@@ -1,0 +1,13 @@
+7zip
+bat
+btop
+chezmoi
+dust
+fd
+ffmpeg
+fzf
+git-aliases
+lsd
+ripgrep
+starship
+zoxide
