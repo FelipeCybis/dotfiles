@@ -1,0 +1,40 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$os\
+$all\
+$memory_usage\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$container\
+$shell\
+$character\
+"""
+
+[os]
+format = "on $symbol "
+style = "bold blue"
+disabled = false
+
+[os.symbols]
+Windows = " "
+Ubuntu = " "
+
+[python]
+symbol = " "
+
+[cmd_duration]
+min_time = 5
+format = 'took [$duration](bold yellow)'
+
+[memory_usage]
+disabled = false
+format = ' $symbol [${ram}]($style) '
+threshold = -1
+symbol = ' '
+style = 'bold dimmed green'
+
