@@ -25,6 +25,9 @@ Windows = " "
 Ubuntu = " "
 Macos = " "
 
+[git_branch]
+symbol = "  "
+
 [python]
 symbol = " "
 
