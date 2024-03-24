@@ -19,6 +19,12 @@ if platform.is_win then
             domain = { DomainName = 'WSL:Ubuntu' },
         },
     }
+elseif platform.is_mac then
+   options.default_prog = { 'zsh' }
+   options.launch_menu = {
+      { label = 'Zsh', args = { 'zsh' } },
+      { label = 'Bash', args = { 'bash' } },
+   }
 end
 
 return options
