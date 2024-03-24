@@ -18,14 +18,16 @@ plug "zsh-users/zsh-syntax-highlighting"
 autoload -Uz compinit
 compinit
 
+{{ if ne .chezmoi.os "darwin" }}
 # everything installed with brew should come after this
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+source "$HOME/.config/space/space_aliases.sh"
+{{ end }}
 
 eval "$(zoxide init zsh)"
 
 plug "$HOME/.config/zsh/exports.zsh"
 plug "$HOME/.config/zsh/aliases.zsh"
 
-source "$HOME/.config/space/space_aliases.sh"
 
 eval "$(starship init zsh)"

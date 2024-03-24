@@ -12,6 +12,3 @@ eval "$(rye self completion -s zsh)"
 
 # Cargo
 source "$HOME/.cargo/env"
-
-# Broot
-source "$HOME/.config/broot/launcher/bash/br"
