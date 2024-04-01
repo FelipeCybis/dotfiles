@@ -2,11 +2,14 @@
 bat
 btop
 chezmoi
+delta
 dust
+eza
 fd
 ffmpeg
 fzf
 git-aliases
+less
 lsd
 ripgrep
 starship

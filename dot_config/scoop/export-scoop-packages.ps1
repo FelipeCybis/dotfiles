@@ -1,7 +1,7 @@
 
 # Extract package names from Scoop list and save them to apps.txt
 scoop list | ForEach-Object {
-    if ($_ -match 'Name=(.+?)}') {
+    if ($_ -match 'Name=(.+?);') {
         $matches[1]
     }
 } > apps.txt
