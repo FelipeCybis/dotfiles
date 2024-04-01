@@ -1,5 +1,11 @@
+{{- $name := "Felipe Cybis Pereira" -}}
+{{ $email := promptString "email" -}}
 
 {{ if eq .chezmoi.os "windows" }}
 [cd]
 command="pwsh"
 {{ end }}
+
+[data]
+    name={{ $name | quote }}
+    email={{ $email | quote }}
