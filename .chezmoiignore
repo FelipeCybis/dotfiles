@@ -1,6 +1,7 @@
 {{ if eq .chezmoi.os "windows" }}
 .zshrc
 .config/zsh
+.vim/
 {{ end }}
 
 {{ if eq .chezmoi.os "linux" }}
@@ -13,4 +14,5 @@
 
 {{ if ne .chezmoi.os "windows" }}
 .config/scoop
+vimfiles/
 {{ end }}

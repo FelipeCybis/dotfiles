@@ -1,0 +1,29 @@
+
+set mouse=a
+
+set number
+set relativenumber
+
+set cursorline
+:highlight Cursorline cterm=bold ctermbg=black
+
+set hlsearch
+
+set tabstop=4
+set softtabstop=4
+set textwidth=79
+set expandtab
+
+set showmatch
+
+set termguicolors
+colorscheme desert
+
+syntax on
+set lcs=space:·
+set list
+
+call plug#begin()
+Plug 'vim-airline/vim-airline'
+call plug#end()
+
