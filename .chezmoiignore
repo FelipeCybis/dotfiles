@@ -15,4 +15,5 @@
 {{ if ne .chezmoi.os "windows" }}
 .config/scoop
 vimfiles/
+Documents/
 {{ end }}
