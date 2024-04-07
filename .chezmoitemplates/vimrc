@@ -1,4 +1,3 @@
-
 set mouse=a
 
 set number
@@ -23,7 +22,17 @@ syntax on
 set lcs=space:·
 set list
 
+filetype plugin indent on
+
 call plug#begin()
 Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
 call plug#end()
 
+noremap <leader>w :w<CR>
+noremap <leader>q :q<CR>
+xnoremap v iw
+xnoremap p pgvy
+
+nnoremap <C-t> :NERDTreeToggle<CR>
