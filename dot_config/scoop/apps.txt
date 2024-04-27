@@ -11,6 +11,8 @@ fzf
 git-aliases
 less
 lsd
+lsd-aliases
+psfzf
 ripgrep
 starship
 zoxide
