@@ -1,0 +1,33 @@
+
+# oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/di4am0nd.omp.json" | Invoke-Expression
+Invoke-Expression (&starship init powershell)
+
+# Make tab completion looks like unix
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t'
+Set-PsFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
+
+
+# Check if Terminal-Icons module is installed
+if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
+     # Install the module if it's not installed
+     Write-Host "Installing Terminal-Icons module..."
+     Install-Module -Name Terminal-Icons -Scope CurrentUser -Force
+}
+# Import the module
+Import-Module -Name Terminal-Icons
+
+# Git aliases plugin
+Import-Module git-aliases -DisableNameChecking
+
+# lsd aliases plugin
+Import-Module lsd-aliases -DisableNameChecking
+
+{{ if eq .chezmoi.username "DESKTOP-JH5KUE3\\Felipe" }}
+function cdrepos { set-location "D:\Felipe\Repos\" }
+{{ end }}
+
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
+$fzf_functions = Join-Path -Path $PSScriptRoot -ChildPath "FzFCustomFunctions.ps1"
+. $fzf_functions
