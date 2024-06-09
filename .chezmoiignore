@@ -1,3 +1,5 @@
+LICENSE
+
 {{ if eq .chezmoi.os "windows" }}
 .zshrc
 .config/zsh
