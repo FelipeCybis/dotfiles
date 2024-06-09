@@ -1,4 +1,5 @@
 LICENSE
+README.md
 
 {{ if eq .chezmoi.os "windows" }}
 .zshrc
