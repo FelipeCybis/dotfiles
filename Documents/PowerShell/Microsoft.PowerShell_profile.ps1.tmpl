@@ -17,12 +17,6 @@ if (-not (Get-Module -Name Terminal-Icons -ListAvailable)) {
 # Import the module
 Import-Module -Name Terminal-Icons
 
-# Git aliases plugin
-Import-Module git-aliases -DisableNameChecking
-
-# lsd aliases plugin
-Import-Module lsd-aliases -DisableNameChecking
-
 {{ if eq .chezmoi.username "DESKTOP-JH5KUE3\\Felipe" }}
 function cdrepos { set-location "D:\Felipe\Repos\" }
 {{ end }}
