@@ -1,7 +1,7 @@
 local wezterm = require('wezterm')
 
 -- Initial opacity value
-local opacity = 0.9;
+local opacity = 1.0;
 local window_background_opacity = opacity;
 
 wezterm.on('increase-opacity', function(window, pane)

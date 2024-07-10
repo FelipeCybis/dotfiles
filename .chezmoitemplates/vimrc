@@ -15,8 +15,6 @@ set expandtab
 
 set showmatch
 
-set termguicolors
-colorscheme desert
 
 syntax on
 set lcs=space:·
@@ -28,7 +26,11 @@ call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 call plug#end()
+
+set termguicolors
+colorscheme catppuccin_frappe
 
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
