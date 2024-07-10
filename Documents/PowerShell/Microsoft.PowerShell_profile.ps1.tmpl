@@ -25,3 +25,6 @@ Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
 $fzf_functions = Join-Path -Path $PSScriptRoot -ChildPath "FzFCustomFunctions.ps1"
 . $fzf_functions
+$exports = Join-Path -Path $PSScriptRoot -ChildPath "exports.ps1"
+. $exports
+
