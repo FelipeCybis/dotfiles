@@ -19,4 +19,5 @@ README.md
 .config/scoop
 vimfiles/
 Documents/
+AppData/
 {{ end }}

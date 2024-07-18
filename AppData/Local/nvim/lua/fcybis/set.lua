@@ -1,0 +1,21 @@
+vim.opt.nu = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
+vim.opt.swapfile = true
+
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.isfname:append("@-@")
+
+vim.g.mapleader = " "
+
+vim.g.python3_host_prog = "C:\\Users\\felip\\AppData\\Local\\nvim\\nvim_venv\\Scripts\\python.exe"
