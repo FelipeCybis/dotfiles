@@ -46,7 +46,19 @@ return require('packer').startup(function(use)
             { 'neovim/nvim-lspconfig' },
             { 'hrsh7th/nvim-cmp' },
             { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-cmdline' },
             { 'L3MON4D3/LuaSnip' },
         }
+    }
+    use("github/copilot.vim")
+    use {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        branch = "canary",
+        dependencies = {
+            { "github/copilot.vim" },    -- or github/copilot.vim
+            { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+        },
     }
 end)
