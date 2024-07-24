@@ -5,32 +5,32 @@ local opacity = 1.0;
 local window_background_opacity = opacity;
 
 wezterm.on('increase-opacity', function(window, pane)
-	local overrides = window:get_config_overrides() or {}
-	opacity = math.min(1.0, opacity + 0.1)
-	overrides.window_background_opacity = opacity;
-	window:set_config_overrides(overrides)
-	end
+    local overrides = window:get_config_overrides() or {}
+    opacity = math.min(1.0, opacity + 0.1)
+    overrides.window_background_opacity = opacity;
+    window:set_config_overrides(overrides)
+end
 )
 
 wezterm.on('decrease-opacity', function(window, pane)
-	local overrides = window:get_config_overrides() or {}
-	opacity = math.max(0.1, opacity - 0.1)
-	overrides.window_background_opacity = opacity;
-	window:set_config_overrides(overrides)
-	end
+    local overrides = window:get_config_overrides() or {}
+    opacity = math.max(0.1, opacity - 0.1)
+    overrides.window_background_opacity = opacity;
+    window:set_config_overrides(overrides)
+end
 )
 
 local keys = {
-    { key = 'F3', mods = 'NONE', action = wezterm.action.ShowLauncher },
+    { key = 'Space', mods = 'LEADER', action = wezterm.action.ShowLauncher },
     -- PANES
     {
         key = 'v',
-        mods = 'ALT',
+        mods = 'LEADER',
         action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
     },
     {
         key = 's',
-        mods = 'ALT',
+        mods = 'LEADER',
         action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
     },
     {
@@ -63,7 +63,7 @@ local keys = {
         mods = 'ALT',
         action = wezterm.action.AdjustPaneSize { 'Down', 5 },
     },
-    { key = 'K', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
+    { key = 'K',     mods = 'ALT',    action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
     {
         key = 'L',
         mods = 'ALT',
@@ -90,9 +90,7 @@ local keys = {
 
 
 return {
-    leader = { key = 'a', mods = 'ALT', timeout_milliseconds = 1000 },
+    leader = { key = 'Space', mods = 'CTRL', timeout_milliseconds = 1000 },
     keys = keys,
     window_background_opacity = window_background_opacity,
 }
-
-
