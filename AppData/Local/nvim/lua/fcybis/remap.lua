@@ -19,8 +19,15 @@ vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
+-- paste from clipboard
+vim.keymap.set("n", "<leader>p", "\"*p")
+vim.keymap.set("v", "<leader>p", "\"*p")
+
 vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format()
+end)
+vim.keymap.set("n", "<leader>ga", function()
+    vim.lsp.buf.code_action()
 end)
 
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
@@ -36,3 +43,27 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.highlight.on_yank()
     end,
 })
+
+-- Save file faster using leader key
+vim.keymap.set("n", "<leader>w", ":w<CR>")
+
+-- Move cursor to next line even if it is wrapped
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+
+-- Keep visual mode after indenting < or >
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
+-- Terminal within neovim
+vim.keymap.set("n", "<leader>tt", function()
+    vim.cmd("terminal")
+    vim.cmd("startinsert")
+end)
+
+vim.keymap.set("n", "<leader>ts", function()
+    vim.cmd("belowright 12split")
+    vim.cmd("set winfixheight")
+    vim.cmd("terminal")
+    vim.cmd("startinsert")
+end)

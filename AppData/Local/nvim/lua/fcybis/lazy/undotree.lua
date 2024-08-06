@@ -1,7 +1,7 @@
 return {
     "mbbill/undotree",
 
-    diffcommand = function()
+    config = function()
         vim.g.undotree_DiffCommand = "FC"
     end,
 
