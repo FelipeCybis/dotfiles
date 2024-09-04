@@ -85,7 +85,12 @@ local keys = {
         key = 'i',
         action = wezterm.action.EmitEvent 'decrease-opacity',
     },
-
+    -- UTILS
+    {
+        key = 'r',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.ReloadConfiguration,
+    },
 }
 
 
