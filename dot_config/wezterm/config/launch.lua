@@ -14,8 +14,8 @@ if platform.is_win then
             domain = { DomainName = 'WSL:Ubuntu' },
         },
         {
-            label = 'WSL:Ubuntu - monitoring',
-            domain = { DomainName = 'WSL:Ubuntu' },
+            label = 'Monitoring',
+            domain = { DomainName = 'monitoring' },
         },
     }
 elseif platform.is_mac then

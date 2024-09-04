@@ -1,6 +1,13 @@
 return {
     -- ref: https://wezfurlong.org/wezterm/config/lua/SshDomain.html
-    ssh_domains = {},
+    ssh_domains = {
+        {
+            name = "labo",
+            remote_address = "10.113.113.118",
+            username = "Felipe",
+
+        }
+    },
 
     -- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
     unix_domains = {

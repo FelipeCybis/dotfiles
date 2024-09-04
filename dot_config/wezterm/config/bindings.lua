@@ -91,6 +91,12 @@ local keys = {
         mods = 'CTRL|SHIFT',
         action = wezterm.action.ReloadConfiguration,
     },
+    -- Detaches the domain associated with the current pane
+    {
+        key = 'D',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.DetachDomain 'CurrentPaneDomain',
+    },
 }
 
 
