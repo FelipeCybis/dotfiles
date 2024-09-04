@@ -21,7 +21,7 @@ end
 )
 
 local keys = {
-    { key = 'Space', mods = 'LEADER', action = wezterm.action.ShowLauncher },
+    { key = 'Space', mods = 'LEADER',   action = wezterm.action.ShowLauncher },
     -- PANES
     {
         key = 'v',
@@ -35,43 +35,43 @@ local keys = {
     },
     {
         key = 'h',
-        mods = 'ALT',
+        mods = 'LEADER',
         action = wezterm.action.ActivatePaneDirection 'Left',
     },
     {
         key = 'l',
-        mods = 'ALT',
+        mods = 'LEADER',
         action = wezterm.action.ActivatePaneDirection 'Right',
     },
     {
         key = 'k',
-        mods = 'ALT',
+        mods = 'LEADER',
         action = wezterm.action.ActivatePaneDirection 'Up',
     },
     {
         key = 'j',
-        mods = 'ALT',
+        mods = 'LEADER',
         action = wezterm.action.ActivatePaneDirection 'Down',
     },
     {
-        key = 'H',
-        mods = 'ALT',
+        key = 'h',
+        mods = 'ALT|CTRL',
         action = wezterm.action.AdjustPaneSize { 'Left', 5 },
     },
     {
-        key = 'J',
-        mods = 'ALT',
+        key = 'j',
+        mods = 'ALT|CTRL',
         action = wezterm.action.AdjustPaneSize { 'Down', 5 },
     },
-    { key = 'K',     mods = 'ALT',    action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
+    { key = 'k',     mods = 'ALT|CTRL', action = wezterm.action.AdjustPaneSize { 'Up', 5 } },
     {
-        key = 'L',
-        mods = 'ALT',
+        key = 'l',
+        mods = 'ALT|CTRL',
         action = wezterm.action.AdjustPaneSize { 'Right', 5 },
     },
     {
         key = 'q',
-        mods = 'ALT',
+        mods = 'LEADER',
         action = wezterm.action.CloseCurrentPane { confirm = true },
     },
     -- BACKGROUND OPACITY
