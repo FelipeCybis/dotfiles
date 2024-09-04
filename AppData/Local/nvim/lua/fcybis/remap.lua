@@ -26,7 +26,7 @@ vim.keymap.set("v", "<leader>p", "\"*p")
 vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format()
 end)
-vim.keymap.set("n", "<leader>ga", function()
+vim.keymap.set("n", "<leader>ca", function()
     vim.lsp.buf.code_action()
 end)
 
