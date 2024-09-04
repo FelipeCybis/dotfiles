@@ -8,7 +8,7 @@ return {
     opts = {
         ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "html", "python", "typescript", "rust", "markdown" },
         sync_install = false,
-        auto_install = true,
+        auto_install = false,
         indent = { enable = true },
         highlight = { enable = true },
         incremental_selection = {

@@ -2,16 +2,16 @@ return {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     dependencies = {
-        { 'williamboman/mason.nvim' },
-        { 'williamboman/mason-lspconfig.nvim' },
-
-        { 'neovim/nvim-lspconfig' },
-        { 'hrsh7th/nvim-cmp' },
-        { 'hrsh7th/cmp-nvim-lsp' },
-        { 'hrsh7th/cmp-buffer' },
-        { 'hrsh7th/cmp-path' },
-        { 'hrsh7th/cmp-cmdline' },
-        { 'L3MON4D3/LuaSnip' },
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "neovim/nvim-lspconfig",
+        "hrsh7th/nvim-cmp",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "L3MON4D3/LuaSnip",
+        "j-hui/fidget.nvim",
     },
 
     config = function()
@@ -33,11 +33,44 @@ return {
             }
         })
 
+        require("fidget").setup({})
         require("mason").setup({})
         require("mason-lspconfig").setup({
             ensure_installed = { "rust_analyzer", "basedpyright", "lua_ls", "ruff_lsp" },
             handlers = {
                 lsp_zero.default_setup,
+                rust_analyzer = function()
+                    require("lspconfig").rust_analyzer.setup({
+                        on_attach = function(client, bufnr)
+                            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                        end,
+                        settings = {
+                            ["rust-analyzer"] = {
+                                checkOnSave = {
+                                    command = "clippy",
+                                },
+                                cargo = {
+                                    buildScripts = {
+                                        enable = true
+                                    },
+                                },
+                                procMacro = {
+                                    enable = true
+                                },
+                                -- add_return_type = {
+                                --     enable = true
+                                -- },
+                                -- inlayHints = {
+                                --     enable = true,
+                                --     typeHints = true,
+                                --     parameterHintsPrefix = "<- ",
+                                --     chainingHints = true,
+                                --     otherHintsPrefix = "=> ",
+                                -- },
+                            },
+                        },
+                    })
+                end,
                 ruff_lsp = function()
                     require("lspconfig").ruff_lsp.setup {
                         on_attach = function(client, bufnr)

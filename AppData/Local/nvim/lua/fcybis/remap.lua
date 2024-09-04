@@ -12,7 +12,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- paste over without replacing the register
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("x", "p", "\"_dP")
 
 -- yank it to clipboard
 vim.keymap.set("n", "<leader>y", "\"+y")
