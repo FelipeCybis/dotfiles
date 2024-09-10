@@ -1,3 +1,5 @@
+local wezterm = require('wezterm')
+
 return {
     -- ref: https://wezfurlong.org/wezterm/config/lua/SshDomain.html
     ssh_domains = {
@@ -12,8 +14,8 @@ return {
     -- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
     unix_domains = {
         {
-            name = 'monitoring',
-        }
+            name = "mux",
+        },
     },
 
     -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
