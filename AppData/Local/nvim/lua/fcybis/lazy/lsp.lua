@@ -18,7 +18,22 @@ return {
         local lsp_zero = require("lsp-zero")
 
         lsp_zero.on_attach(function(client, bufnr)
-            lsp_zero.default_keymaps({ buffer = bufnr })
+            -- Keep default lsp_zero mappings
+            lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
+            -- Fzf-improved lsp commands
+            vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references<CR>", { buffer = bufnr, desc = "Fzf LSP references" })
+            vim.keymap.set("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<CR>",
+                { buffer = bufnr, desc = "Fzf LSP definitions" })
+            vim.keymap.set("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>",
+                { buffer = bufnr, desc = "Code actions" })
+            vim.keymap.set("n", "<leader>ls", "<cmd>FzfLua lsp_document_symbols<CR>",
+                { buffer = bufnr, desc = "Fzf LSP symbols" })
+            vim.keymap.set("n", "<leader>lx", "<cmd>FzfLua lsp_document_diagnostics<CR>",
+                { buffer = bufnr, desc = "Fzf LSP diagnostics" })
+            -- Other mappings to be used by any LSP
+            vim.keymap.set("n", "<leader>lf", function()
+                vim.lsp.buf.format()
+            end, { buffer = bufnr, desc = "Format buffer with LSP" })
         end)
 
         lsp_zero.format_on_save({
@@ -27,50 +42,28 @@ return {
                 timeout_ms = 10000,
             },
             servers = {
-                ["rust_analyzer"] = { "rust" },
                 ["ruff_lsp"] = { "python" },
                 ["lua_ls"] = { "lua" },
+                ["tinymist"] = { "typst" },
             }
         })
 
         require("fidget").setup({})
         require("mason").setup({})
         require("mason-lspconfig").setup({
-            ensure_installed = { "rust_analyzer", "basedpyright", "lua_ls", "ruff_lsp" },
+            ensure_installed = {
+                "basedpyright",
+                "lua_ls",
+                "ruff_lsp",
+                "tinymist",
+            },
             handlers = {
                 lsp_zero.default_setup,
-                rust_analyzer = function()
-                    require("lspconfig").rust_analyzer.setup({
-                        on_attach = function(client, bufnr)
-                            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-                        end,
-                        settings = {
-                            ["rust-analyzer"] = {
-                                checkOnSave = {
-                                    command = "clippy",
-                                },
-                                cargo = {
-                                    buildScripts = {
-                                        enable = true
-                                    },
-                                },
-                                procMacro = {
-                                    enable = true
-                                },
-                                -- add_return_type = {
-                                --     enable = true
-                                -- },
-                                -- inlayHints = {
-                                --     enable = true,
-                                --     typeHints = true,
-                                --     parameterHintsPrefix = "<- ",
-                                --     chainingHints = true,
-                                --     otherHintsPrefix = "=> ",
-                                -- },
-                            },
-                        },
-                    })
-                end,
+                -- Rust analyzer is disbaled here because all work is done by
+                -- rustaceanvim (rustacean.lua), but even uninstalled from mason it
+                -- would cause some kind of conflicts so this empty function makes sure
+                -- it is disabled
+                rust_analyzer = function() end,
                 ruff_lsp = function()
                     require("lspconfig").ruff_lsp.setup {
                         on_attach = function(client, bufnr)
@@ -109,6 +102,13 @@ return {
                         },
                     })
                 end,
+                tinymist = function()
+                    require("lspconfig").tinymist.setup({
+                        settings = {
+                            formatterMode = "typstyle",
+                        },
+                    })
+                end,
             },
         })
 
@@ -122,7 +122,7 @@ return {
             mapping = {
                 ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
                 ["<C-n>"] = cmp.mapping.select_next_item({ behavior = "select" }),
-                ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete({}),
             },
         })

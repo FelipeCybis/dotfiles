@@ -1,6 +1,6 @@
 return {
     "echasnovski/mini.starter",
-    version = false,
+    version = "0.13.0",
     config = function()
         local starter = require("mini.starter")
         local opts = {
