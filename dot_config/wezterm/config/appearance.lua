@@ -12,6 +12,10 @@ return {
 
     -- font
     font = wezterm.font("MesloLGS NF"),
+
+    -- Allow tiling window manager do its thing and not wezterm
+    adjust_window_size_when_changing_font_size = false,
+
     -- Make it look like tabs, with better GUI controls
     use_fancy_tab_bar = true,
     -- Don't let any individual tab name take too much room
