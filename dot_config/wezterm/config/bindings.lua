@@ -1,4 +1,5 @@
 local wezterm = require('wezterm')
+local nvim_compat = require('config.neovim')
 
 -- Initial opacity value
 local opacity = 1.0;
@@ -19,10 +20,6 @@ wezterm.on('decrease-opacity', function(window, pane)
     window:set_config_overrides(overrides)
 end
 )
-
-function is_an_editor(name)
-    return os.getenv("NVIM") == nil
-end
 
 local keys = {
     {
@@ -50,65 +47,29 @@ local keys = {
         key = 'h',
         mods = 'ALT',
         action = wezterm.action_callback(function(window, pane)
-            local is_nvim = pane:get_user_vars().NVIM_WEZTERM
-
-            if is_nvim then
-                window:perform_action(
-                    wezterm.action.Multiple {
-                        wezterm.action.SendKey { key = "h", mods = "ALT" },
-                    }, pane)
-            else
-                window:perform_action(wezterm.action.ActivatePaneDirection 'Left', pane)
-            end
-        end)
+            nvim_compat.move_neovim_compat(window, pane, 'h')
+        end),
     },
     {
         key = 'l',
         mods = 'ALT',
         action = wezterm.action_callback(function(window, pane)
-            local is_nvim = pane:get_user_vars().NVIM_WEZTERM
-
-            if is_nvim then
-                window:perform_action(
-                    wezterm.action.Multiple {
-                        wezterm.action.SendKey { key = "l", mods = "ALT" },
-                    }, pane)
-            else
-                window:perform_action(wezterm.action.ActivatePaneDirection 'Right', pane)
-            end
-        end)
+            nvim_compat.move_neovim_compat(window, pane, 'l')
+        end),
     },
     {
         key = 'k',
         mods = 'ALT',
         action = wezterm.action_callback(function(window, pane)
-            local is_nvim = pane:get_user_vars().NVIM_WEZTERM
-
-            if is_nvim then
-                window:perform_action(
-                    wezterm.action.Multiple {
-                        wezterm.action.SendKey { key = "k", mods = "ALT" },
-                    }, pane)
-            else
-                window:perform_action(wezterm.action.ActivatePaneDirection 'Up', pane)
-            end
-        end)
+            nvim_compat.move_neovim_compat(window, pane, 'k')
+        end),
     },
     {
         key = 'j',
         mods = 'ALT',
         action = wezterm.action_callback(function(window, pane)
-            local is_nvim = pane:get_user_vars().NVIM_WEZTERM
-
-            if is_nvim then
-                window:perform_action(
-                    wezterm.action.Multiple {
-                        wezterm.action.SendKey { key = "j", mods = "ALT" },
-                    }, pane)
-            else
-                window:perform_action(wezterm.action.ActivatePaneDirection 'Down', pane)
-            end
-        end)
+            nvim_compat.move_neovim_compat(window, pane, 'j')
+        end),
     },
     {
         key = 'H',
@@ -146,6 +107,14 @@ local keys = {
         mods = 'CTRL|SHIFT',
         key = 'i',
         action = wezterm.action.EmitEvent 'decrease-opacity',
+    },
+    ---- FULLSCREEN
+    {
+        key = 'f',
+        mods = 'CTRL',
+        action = wezterm.action_callback(function(window, pane)
+            nvim_compat.fullscreen_neovim_compat(window, pane)
+        end),
     },
     ---- UTILS
     {
