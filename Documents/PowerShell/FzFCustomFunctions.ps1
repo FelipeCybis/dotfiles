@@ -28,10 +28,10 @@ $tmp, [System.EnvironmentVariableTarget]::Process)
           "--bind", "ctrl-r:unbind(ctrl-r)+change-prompt(🔎 ripgrep> )+disable-search+reload($RG_PREFIX {q} || $trueCmd)+rebind(change,ctrl-f)",
           "--prompt", "🔎 ripgrep> ",
           "--delimiter", ":", 
-          "--header", "CTRL-R (ripgrep) / CTRL-F (fzf) / CTRL-V (vim)",
+          "--header", "CTRL-R (ripgrep) / CTRL-F (fzf) / CTRL-V (nvim)",
           "--preview", "bat --color=always {1} --highlight-line {2}",
           "--preview-window", "up,50%,border-bottom,+{2}+3/3,~3",
-          "--bind", "ctrl-v:become(vim {1} +{2})"
+          "--bind", "ctrl-v:become(nvim {1} +{2})"
         )
 
           & $fzf_command $fzfArgs
@@ -55,10 +55,10 @@ $originalValue, [System.EnvironmentVariableTarget]::Process)
           "--bind", "ctrl-d:change-prompt(󰝰  Directories> )+reload(fd --color=always --type d)+unbind(ctrl-v)+change-preview(lsd --color=always --tree -la --depth 2 {})",
           "--bind", "ctrl-f:change-prompt(  Files> )+reload(fd --color=always --type f)+rebind(ctrl-v)+change-preview(bat --line-range=:50 --color=always {})",
           "--prompt", "  Files> ",
-          "--header", "CTRL-D: Directories / CTRL-F: Files / CTRL-V: VIM",
+          "--header", "CTRL-D: Directories / CTRL-F: Files / CTRL-V: NVIM",
           "--preview", "bat --line-range=:50 --color=always {}",
           "--preview-window", "up,60%,border-bottom,+{2}+3/3,~3",
-          "--bind", "ctrl-v:become(vim {})"
+          "--bind", "ctrl-v:become(nvim {})"
         )
 
           & $fzf_command $fzfArgs
