@@ -1,18 +1,29 @@
+local vim = vim
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- Set python neovim path
+vim.g.python3_host_prog = "C:\\Users\\felip\\AppData\\Local\\nvim\\nvim_venv\\Scripts\\python.exe"
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.o.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
-vim.o.shellcmdflag =
-'-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
-vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-vim.o.shellquote = ''
-vim.o.shellxquote = ''
+-- Save undo history
+vim.opt.undofile = true
 
+-- Set stuff to work well on powershell
+vim.opt.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
+vim.opt.shellcmdflag =
+'-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
+vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+vim.opt.shellquote = ''
+vim.opt.shellxquote = ''
+
+-- Indentation and spaces
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-
 vim.opt.smartindent = true
 
 vim.opt.swapfile = true
@@ -21,12 +32,29 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 8
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
 vim.opt.isfname:append("@-@")
 
 vim.opt.colorcolumn = "89"
 vim.opt.textwidth = 88
 
-vim.g.mapleader = " "
+-- Decrease update time
+vim.opt.updatetime = 250
 
-vim.g.python3_host_prog = "C:\\Users\\felip\\AppData\\Local\\nvim\\nvim_venv\\Scripts\\python.exe"
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true

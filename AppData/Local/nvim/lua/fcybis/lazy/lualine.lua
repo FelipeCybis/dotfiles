@@ -3,5 +3,13 @@ return {
 
     dependencies = { "nvim-tree/nvim-web-devicons" },
 
-    opts = { disabled_filetypes = { "packer", "NVimTree" } },
+    config = function()
+        require("lualine").setup {
+            options = {
+                disabled_filetypes = { "packer", "NVimTree" },
+            },
+
+        }
+        vim.opt.showmode = false
+    end,
 }

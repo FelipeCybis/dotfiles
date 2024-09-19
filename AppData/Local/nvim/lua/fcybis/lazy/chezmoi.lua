@@ -28,7 +28,8 @@ return {
                 end,
             }),
         }
-        _fzf_chezmoi = function()
+
+        Fzf_Chezmoi = function()
             require 'fzf-lua'.fzf_exec(require("chezmoi.commands").list(), {
                 actions = {
                     ['default'] = function(selected, opts)
@@ -41,6 +42,7 @@ return {
             })
         end
 
-        vim.api.nvim_command('command! ChezmoiFzf lua _fzf_chezmoi()')
+        vim.api.nvim_command('command! ChezmoiFzf lua Fzf_Chezmoi()')
+        vim.keymap.set('n', '<leader>fc', '<CMD>ChezmoiFzf<CR>', { desc = "[F]zf: [C]hezmoi" })
     end
 }

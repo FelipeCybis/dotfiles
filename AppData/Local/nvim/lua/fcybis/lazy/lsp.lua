@@ -15,25 +15,27 @@ return {
     },
 
     config = function()
+        local vim = vim
         local lsp_zero = require("lsp-zero")
 
         lsp_zero.on_attach(function(client, bufnr)
             -- Keep default lsp_zero mappings
             lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
             -- Fzf-improved lsp commands
-            vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references<CR>", { buffer = bufnr, desc = "Fzf LSP references" })
+            vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references<CR>",
+                { buffer = bufnr, desc = "LSP [g]oto [r]eferences" })
             vim.keymap.set("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<CR>",
-                { buffer = bufnr, desc = "Fzf LSP definitions" })
+                { buffer = bufnr, desc = "[L]SP [d]efinitions" })
             vim.keymap.set("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>",
-                { buffer = bufnr, desc = "Code actions" })
+                { buffer = bufnr, desc = "[C]ode [a]ctions" })
             vim.keymap.set("n", "<leader>ls", "<cmd>FzfLua lsp_document_symbols<CR>",
-                { buffer = bufnr, desc = "Fzf LSP symbols" })
+                { buffer = bufnr, desc = "[L]SP [s]ymbols" })
             vim.keymap.set("n", "<leader>lx", "<cmd>FzfLua lsp_document_diagnostics<CR>",
-                { buffer = bufnr, desc = "Fzf LSP diagnostics" })
+                { buffer = bufnr, desc = "[L]SP diagnostic[x]" })
             -- Other mappings to be used by any LSP
             vim.keymap.set("n", "<leader>lf", function()
                 vim.lsp.buf.format()
-            end, { buffer = bufnr, desc = "Format buffer with LSP" })
+            end, { buffer = bufnr, desc = "[L]SP [f]ormat buffer" })
         end)
 
         lsp_zero.format_on_save({
@@ -124,8 +126,8 @@ return {
                 { name = "buffer",   group_index = 2 },
             },
             mapping = {
-                ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
-                ["<C-n>"] = cmp.mapping.select_next_item({ behavior = "select" }),
+                ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
+                ["<Tab>"] = cmp.mapping.select_next_item({ behavior = "select" }),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete({}),
             },
