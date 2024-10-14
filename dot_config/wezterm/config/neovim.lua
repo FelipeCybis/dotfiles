@@ -74,7 +74,7 @@ end
 local function move_neovim_compat(window, pane, direction)
     local is_nvim = pane:get_user_vars().NVIM_WEZTERM
 
-    if is_nvim then
+    if is_nvim == "true" then
         window:perform_action(
             wezterm.action.Multiple {
                 wezterm.action.SendKey { key = direction, mods = "ALT" },
@@ -88,7 +88,7 @@ return_args.move_neovim_compat = move_neovim_compat
 local function fullscreen_neovim_compat(window, pane)
     local is_nvim = pane:get_user_vars().NVIM_WEZTERM
 
-    if is_nvim then
+    if is_nvim == "true" then
         window:perform_action(
             wezterm.action.Multiple {
                 wezterm.action.SendKey { key = "f", mods = "CTRL" },
