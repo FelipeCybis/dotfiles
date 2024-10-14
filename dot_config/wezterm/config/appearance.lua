@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 
 -- show the domain and workspace in the status area, for quicker and easier sanity checking
 wezterm.on("update-right-status", function(window, pane)
-    window:set_right_status(pane:get_domain_name() .. " / " .. window:active_workspace())
+    window:set_right_status(" " .. pane:get_domain_name() .. " / " .. window:active_workspace() .. " ")
 end)
 
 return {

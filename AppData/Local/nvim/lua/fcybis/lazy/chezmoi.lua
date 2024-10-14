@@ -1,6 +1,6 @@
 return {
     'xvzc/chezmoi.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'ibhagwan/fzf-lua' },
     config = function()
         require("chezmoi").setup {
             -- your configurations
@@ -12,9 +12,6 @@ return {
                 on_open = true,
                 on_apply = true,
                 on_watch = false,
-            },
-            telescope = {
-                select = { "<CR>" },
             },
             --  e.g. ~/.local/share/chezmoi/*
             vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
@@ -29,20 +26,35 @@ return {
             }),
         }
 
+        local Path = require("plenary.path")
+        local fzf_lua = require("fzf-lua")
+        Chezmoi_files = function()
+            local full_list = require("chezmoi.commands").list()
+            local files = {}
+            for _, filename in ipairs(full_list) do
+                local path = Path:new("~/" .. filename)
+                if not Path:new(path:expand()):is_dir() then
+                    table.insert(files, "~/" .. filename)
+                end
+            end
+            return files
+        end
         Fzf_Chezmoi = function()
-            require 'fzf-lua'.fzf_exec(require("chezmoi.commands").list(), {
-                actions = {
+            fzf_lua.fzf_exec(Chezmoi_files(), {
+                prompt    = "Chezmoi Files> ",
+                previewer = "builtin",
+                actions   = {
                     ['default'] = function(selected, opts)
                         require("chezmoi.commands").edit({
-                            targets = { "~/" .. selected[1] },
+                            targets = { selected[1] },
                             args = { "--watch" }
                         })
-                    end
+                    end,
                 }
             })
         end
 
         vim.api.nvim_command('command! ChezmoiFzf lua Fzf_Chezmoi()')
-        vim.keymap.set('n', '<leader>fc', '<CMD>ChezmoiFzf<CR>', { desc = "[F]zf: [C]hezmoi" })
+        vim.keymap.set('n', '<leader>fc', '<CMD>ChezmoiFzf<CR>', { desc = "[f]zf: [c]hezmoi" })
     end
 }

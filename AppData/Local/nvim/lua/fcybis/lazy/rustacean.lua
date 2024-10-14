@@ -27,6 +27,9 @@ return {
                 server = {
                     on_attach = function(client, bufnr)
                         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                        vim.keymap.set("n", "<leader>lr", "<CMD>RustLsp run<CR>",
+                            { desc = "[l]sp [r]un function" }
+                        )
                     end,
                     default_settings = {
                         ['rust-analyzer'] = {

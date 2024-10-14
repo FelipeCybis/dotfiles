@@ -51,14 +51,14 @@ return {
                 function()
                     toggle_telescope(harpoon:list())
                 end,
-                desc = "Harpoon: telescope UI",
+                desc = "[H]arpoon: [t]elescope",
             },
             {
                 "<leader>hd",
                 function()
                     harpoon.ui:toggle_quick_menu(harpoon:list())
                 end,
-                desc = "Harpoon: default UI",
+                desc = "[H]arpoon: quick [l]ist",
             },
 
             {
@@ -66,7 +66,7 @@ return {
                 function()
                     harpoon:list():add()
                 end,
-                desc = "Harpoon: add",
+                desc = "[H]arpoon: [a]dd",
             },
 
             {

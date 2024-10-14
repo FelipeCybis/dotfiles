@@ -57,13 +57,17 @@ local function move_across_tabs_compat(window, pane, direction)
                 local next_tab = mux_window:tabs_with_info()[next_tab_index]
                 -- if there is a tab to the directino we want to move to, activate it
                 if next_tab then
-                    return wezterm.action_callback(function() next_tab.tab:activate() end)
+                    return wezterm.action_callback(function()
+                        next_tab.tab:activate()
+                    end)
                 end
             end
         end
     else
         -- If there is no pane to the direction we want to move to, create a new pane
-        return wezterm.action_callback(function() wezterm.log_info("Either on top or bottom of window.") end)
+        return wezterm.action_callback(function()
+            wezterm.log_info("Either on top or bottom of window.")
+        end)
     end
 end
 

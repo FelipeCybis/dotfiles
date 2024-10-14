@@ -3,7 +3,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set python neovim path
-vim.g.python3_host_prog = "C:\\Users\\felip\\AppData\\Local\\nvim\\nvim_venv\\Scripts\\python.exe"
+vim.g.python3_host_prog = vim.fn.stdpath('config') .. "\\nvim_venv\\Scripts\\python.exe"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
