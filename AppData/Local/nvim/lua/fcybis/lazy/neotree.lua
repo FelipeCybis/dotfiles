@@ -25,7 +25,7 @@ return {
         -- -- When I press <leader>r I want to show the current file in neo-tree,
         -- -- But if neo-tree is open it, close it, to work like a toggle
         {
-            "<leader>r",
+            "<leader>n",
             function()
                 -- Function to check if NeoTree is open in any window
                 local function is_neo_tree_open()
@@ -45,7 +45,7 @@ return {
                     vim.cmd("Neotree reveal")
                 end
             end,
-            desc = "[P]Toggle current file in NeoTree",
+            desc = "Toggle current file in [N]eoTree",
         },
     },
 }
