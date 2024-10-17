@@ -32,7 +32,7 @@ return {
                 },
                 lualine_y = {
                     { function()
-                        local venv = os.getenv("VIRTUAL_ENV") or "NO ENV"
+                        local venv = os.getenv("VIRTUAL_ENV_PROMPT") or os.getenv("VIRTUAL_ENV") or "NO ENV"
                         return " " .. venv
                     end,
                         cond = function() return vim.bo.filetype == "python" end,
