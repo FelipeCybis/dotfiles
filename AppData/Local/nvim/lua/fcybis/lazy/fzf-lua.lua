@@ -34,16 +34,6 @@ return {
             { "<leader>gt", fzf.git_stash,        desc = "Fzf: [g]it s[t]ash" },
             { "<leader>gc", fzf.git_commits,      desc = "Fzf: [g]it [c]ommits (project)" },
             { "<leader>gb", fzf.git_bcommits,     desc = "Fzf: [g]it commits ([b]uffer)" },
-            -- go to nvim config cwd and search files there
-            {
-                "<leader>vrc",
-                function()
-                    fzf.files({
-                        cwd = vim.fn.stdpath('config')
-                    })
-                end,
-                desc = "Fzf: nvim config"
-            },
         }
     end,
 }
