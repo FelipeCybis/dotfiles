@@ -9,6 +9,7 @@ return {
     color_scheme = 'Catppuccin Frappe',
     -- tab bar
     -- hide_tab_bar_if_only_one_tab = true,
+    tab_bar_at_bottom = true,
 
     -- font
     font = wezterm.font("MesloLGS NF"),
@@ -17,7 +18,7 @@ return {
     adjust_window_size_when_changing_font_size = false,
 
     -- Make it look like tabs, with better GUI controls
-    use_fancy_tab_bar = true,
+    use_fancy_tab_bar = false,
     -- Don't let any individual tab name take too much room
     tab_max_width = 32,
     colors = {
