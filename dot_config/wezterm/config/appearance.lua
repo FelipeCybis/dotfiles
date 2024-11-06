@@ -1,8 +1,15 @@
 local wezterm = require('wezterm')
 
 -- show the domain and workspace in the status area, for quicker and easier sanity checking
-wezterm.on("update-right-status", function(window, pane)
-    window:set_right_status(" " .. pane:get_domain_name() .. " / " .. window:active_workspace() .. " ")
+wezterm.on('update-right-status', function(window, pane)
+    local meta = pane:get_metadata() or {}
+
+    local right_status = " " .. pane:get_domain_name() .. " / " .. window:active_workspace() .. " "
+    if meta.is_tardy then
+        local secs = meta.since_last_response_ms / 1000.0
+        right_status = right_status .. string.format('tardy: %5.1fs⏳', secs)
+    end
+    window:set_right_status(right_status)
 end)
 
 return {
