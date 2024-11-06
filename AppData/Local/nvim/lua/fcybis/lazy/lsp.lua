@@ -36,6 +36,10 @@ return {
             vim.keymap.set("n", "<leader>lf", function()
                 vim.lsp.buf.format()
             end, { buffer = bufnr, desc = "[L]SP [f]ormat buffer" })
+            -- Toggle inlay hints
+            vim.keymap.set("n", "<leader>li", function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+            end, { buffer = bufnr, desc = "[L]SP [i]nlay hints" })
         end)
 
         lsp_zero.format_on_save({
