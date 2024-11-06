@@ -3,7 +3,11 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set python neovim path
-vim.g.python3_host_prog = vim.fn.stdpath('config') .. "\\nvim_venv\\Scripts\\python.exe"
+if vim.fn.has('win32') == 1 then
+    vim.g.python3_host_prog = vim.fn.stdpath('config') .. "\\nvim_venv\\Scripts\\python.exe"
+else
+    vim.g.python3_host_prog = vim.fn.stdpath('config') .. "/nvim_venv/bin/python3"
+end
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -11,14 +15,16 @@ vim.opt.relativenumber = true
 -- Save undo history
 vim.opt.undofile = true
 
--- Set stuff to work well on powershell
-vim.opt.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
-vim.opt.shellcmdflag =
-'-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
-vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-vim.opt.shellquote = ''
-vim.opt.shellxquote = ''
+if vim.fn.has('win32') == 1 then
+    -- Set stuff to work well on powershell
+    vim.opt.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
+    vim.opt.shellcmdflag =
+    '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
+    vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+    vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+    vim.opt.shellquote = ''
+    vim.opt.shellxquote = ''
+end
 
 -- Indentation and spaces
 vim.opt.tabstop = 4
