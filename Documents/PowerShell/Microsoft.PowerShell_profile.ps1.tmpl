@@ -22,6 +22,8 @@ $exports = Join-Path -Path $PSScriptRoot -ChildPath "exports.ps1"
 . $exports
 $aliases = Join-Path -Path $PSScriptRoot -ChildPath "aliases.ps1"
 . $aliases
+$completions = Join-Path -Path $PSScriptRoot -ChildPath "completions.ps1"
+. $completions
 
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
 Invoke-Expression (&starship init powershell)
