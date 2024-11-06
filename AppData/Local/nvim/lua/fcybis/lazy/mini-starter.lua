@@ -16,8 +16,7 @@ return {
             footer = os.date(),
             items = {
                 starter.sections.builtin_actions(),
-                starter.sections.recent_files(10, false),
-                starter.sections.recent_files(10, true),
+                starter.sections.recent_files(6, true),
             },
             content_hooks = {
                 starter.gen_hook.adding_bullet(),
