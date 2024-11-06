@@ -33,10 +33,10 @@ return {
             active_tab = {
                 -- I use a solarized dark theme; this gives a teal background to the active tab
                 fg_color = '#073642',
-                bg_color = '#2aa198',
+                bg_color = '#00ff00',
             }
         },
-        split = "#2aa198",
+        split = "#00ff00",
     },
     -- Switch to the last active tab when I close a tab
     switch_to_last_active_tab_when_closing_tab = true,
