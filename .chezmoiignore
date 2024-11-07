@@ -16,7 +16,9 @@ README.md
 
 
 {{ if ne .chezmoi.os "windows" }}
+# Windows specific stuff
 .config/scoop
+.glzr/
 vimfiles/
 Documents/
 AppData/
