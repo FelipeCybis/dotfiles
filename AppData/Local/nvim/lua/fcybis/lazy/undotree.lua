@@ -6,6 +6,6 @@ return {
     end,
 
     keys = {
-        { "<leader>u", vim.cmd.UndotreeToggle, desc = "Toggle Undotree" }
+        { "<leader>tu", vim.cmd.UndotreeToggle, desc = "[t]oggle [u]ndotree" }
     },
 }

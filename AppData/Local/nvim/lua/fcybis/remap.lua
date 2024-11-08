@@ -60,16 +60,3 @@ vim.keymap.set("n", "k", "gk")
 -- Keep visual mode after indenting < or >
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-
--- Terminal within neovim
-vim.keymap.set("n", "<leader>tt", function()
-    vim.cmd("terminal")
-    vim.cmd("startinsert")
-end)
-
-vim.keymap.set("n", "<leader>ts", function()
-    vim.cmd("belowright 12split")
-    vim.cmd("set winfixheight")
-    vim.cmd("terminal")
-    vim.cmd("startinsert")
-end)
