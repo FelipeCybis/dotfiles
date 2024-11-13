@@ -4,6 +4,9 @@ return {
     priority = 1000,
 
     config = function()
+        require("catppuccin").setup({
+            integrations = { harpoon = true, mason = true, which_key = true },
+        })
         vim.cmd('colorscheme catppuccin-frappe')
     end
 }
