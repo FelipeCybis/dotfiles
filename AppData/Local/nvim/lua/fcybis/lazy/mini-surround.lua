@@ -2,7 +2,7 @@ return {
     "echasnovski/mini.surround",
     version = "*",
     config = {
-        mappngs = {
+        mappings = {
             add = "<leader>sa",       -- Add surroundng in Normal and Visual modes
             delete = "<leader>sd",    -- Delete surrounding
             find = "<leader>sf",      -- Find surrounding (to the right)

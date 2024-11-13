@@ -28,12 +28,12 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set("n", "<leader>p", "\"*p")
 vim.keymap.set("v", "<leader>p", "\"*p")
 
-vim.keymap.set("n", "<leader>si", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
-    { desc = "Replace word" })
-vim.keymap.set("n", "<leader>sc", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>",
-    { desc = "Replace word interactively" })
-vim.keymap.set("n", "<leader>sf", ":.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>",
-    { desc = "Replace word forward interactively" })
+vim.keymap.set("n", "<leader>rg", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
+    { desc = "[r]eplace word [g]lobally" })
+vim.keymap.set("n", "<leader>rc", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>",
+    { desc = "[r]eplace word intera[c]tively" })
+vim.keymap.set("n", "<leader>rf", ":.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>",
+    { desc = "[r]eplace word [f]orward interactively" })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
