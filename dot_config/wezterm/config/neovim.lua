@@ -1,4 +1,4 @@
-local wezterm = require('wezterm')
+local wezterm = require('wezterm') --[[@as Wezterm]]
 
 return_args = {}
 
@@ -32,6 +32,9 @@ local direction_mapping = {
     ["l"] = "Right",
 }
 
+---@param window Window
+---@param pane Pane
+---@param direction string
 local function move_across_tabs_compat(window, pane, direction)
     -- window:perform_action(wezterm.action_callback(function(window, pane)
     local next_pane = pane:tab():get_pane_direction(direction_mapping[direction])
@@ -71,6 +74,9 @@ local function move_across_tabs_compat(window, pane, direction)
     end
 end
 
+---@param window Window
+---@param pane Pane
+---@param direction string
 local function move_neovim_compat(window, pane, direction)
     local is_nvim = pane:get_user_vars().NVIM_WEZTERM
 
@@ -85,6 +91,8 @@ local function move_neovim_compat(window, pane, direction)
 end
 return_args.move_neovim_compat = move_neovim_compat
 
+---@param window Window
+---@param pane Pane
 local function fullscreen_neovim_compat(window, pane)
     local is_nvim = pane:get_user_vars().NVIM_WEZTERM
 

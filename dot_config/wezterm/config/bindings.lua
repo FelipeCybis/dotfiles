@@ -1,10 +1,12 @@
-local wezterm = require('wezterm')
+local wezterm = require('wezterm') --[[@as Wezterm]]
 local nvim_compat = require('config.neovim')
 
 -- Initial opacity value
 local opacity = 1.0;
 local window_background_opacity = opacity;
 
+---@param window Window
+---@param pane Pane
 wezterm.on('increase-opacity', function(window, pane)
     local overrides = window:get_config_overrides() or {}
     opacity = math.min(1.0, opacity + 0.1)
@@ -13,6 +15,8 @@ wezterm.on('increase-opacity', function(window, pane)
 end
 )
 
+---@param window Window
+---@param pane Pane
 wezterm.on('decrease-opacity', function(window, pane)
     local overrides = window:get_config_overrides() or {}
     opacity = math.max(0.1, opacity - 0.1)

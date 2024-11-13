@@ -1,4 +1,4 @@
-local wezterm = require('wezterm')
+local wezterm = require('wezterm') --[[@as Wezterm]]
 
 -- show the domain and workspace in the status area, for quicker and easier sanity checking
 wezterm.on('update-right-status', function(window, pane)
