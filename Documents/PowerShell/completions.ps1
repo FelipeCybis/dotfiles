@@ -7,3 +7,8 @@ if (Get-Command wezterm -errorAction SilentlyContinue) {
 if (Get-Command chezmoi -errorAction SilentlyContinue) {
     chezmoi completion powershell | Out-String | Invoke-Expression
 }
+
+# uv completions
+if (Get-Command uv -errorAction SilentlyContinue) {
+    uv generate-shell-completion powershell | Out-String | Invoke-Expression
+}
