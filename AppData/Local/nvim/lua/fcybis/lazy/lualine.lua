@@ -1,12 +1,14 @@
 return {
     "nvim-lualine/lualine.nvim",
 
+    event = "VeryLazy",
+
     dependencies = { "nvim-tree/nvim-web-devicons" },
 
     config = function()
         require("lualine").setup {
             options = {
-                disabled_filetypes = { "packer", "NVimTree" },
+                disabled_filetypes = { "packer", "NVimTree", "undotree", "starter" },
             },
             sections = {
                 lualine_a = { 'filename', 'mode' },

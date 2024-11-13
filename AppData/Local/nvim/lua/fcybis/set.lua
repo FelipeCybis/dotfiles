@@ -64,3 +64,13 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
+
+
+vim.api.nvim_create_augroup("DisableStatuslineForStarter", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "DisableStatuslineForStarter",
+    pattern = "starter",
+    callback = function()
+        vim.opt_local.laststatus = 0
+    end,
+})

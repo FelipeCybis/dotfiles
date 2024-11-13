@@ -2,7 +2,7 @@ return {
     -- Color picker
     {
         "uga-rosa/ccc.nvim",
-        lazy = false,
+        lazy = true,
         opts = {
             bar_char = "█",
             point_char = "▍",
@@ -10,8 +10,6 @@ return {
                 auto_enable = false,
             },
         },
-        config = function(_, opts)
-            require("ccc").setup(opts)
-        end,
+        cmd = { "CccConvert", "CccPick", "CccHighlighterToggle" },
     },
 }

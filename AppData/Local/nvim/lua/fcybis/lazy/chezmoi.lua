@@ -1,5 +1,6 @@
 return {
     'xvzc/chezmoi.nvim',
+    event = 'VeryLazy',
     dependencies = { 'nvim-lua/plenary.nvim', 'ibhagwan/fzf-lua' },
     config = function()
         require("chezmoi").setup {
@@ -56,5 +57,5 @@ return {
 
         vim.api.nvim_command('command! ChezmoiFzf lua Fzf_Chezmoi()')
         vim.keymap.set('n', '<leader>fc', '<CMD>ChezmoiFzf<CR>', { desc = "[f]zf: [c]hezmoi" })
-    end
+    end,
 }
