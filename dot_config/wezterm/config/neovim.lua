@@ -1,7 +1,5 @@
 local wezterm = require('wezterm') --[[@as Wezterm]]
 
-return_args = {}
-
 wezterm.on('user-var-changed', function(window, pane, name, value)
     local overrides = window:get_config_overrides() or {}
     if name == "ZEN_MODE" then
@@ -9,15 +7,15 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
         local number_value = tonumber(value)
         if incremental ~= nil then
             while (number_value > 0) do
-                window:perform_action(wezterm.action.IncreaseFontSize, pane)
+                window:perform_action("IncreaseFontSize", pane)
                 number_value = number_value - 1
             end
             overrides.enable_tab_bar = false
         elseif number_value < 0 then
-            window:perform_action(wezterm.action.ResetFontSize, pane)
+            window:perform_action("ResetFontSize", pane)
             overrides.font_size = nil
             overrides.enable_tab_bar = true
-        else
+        elseif number_value ~= nil then
             overrides.font_size = number_value
             overrides.enable_tab_bar = false
         end
@@ -35,6 +33,7 @@ local direction_mapping = {
 ---@param window Window
 ---@param pane Pane
 ---@param direction string
+---@return KeyAssignment
 local function move_across_tabs_compat(window, pane, direction)
     -- window:perform_action(wezterm.action_callback(function(window, pane)
     local next_pane = pane:tab():get_pane_direction(direction_mapping[direction])
@@ -66,12 +65,11 @@ local function move_across_tabs_compat(window, pane, direction)
                 end
             end
         end
-    else
-        -- If there is no pane to the direction we want to move to, create a new pane
-        return wezterm.action_callback(function()
-            wezterm.log_info("Either on top or bottom of window.")
-        end)
     end
+    -- If there is no pane to the direction we want to move to, create a new pane
+    return wezterm.action_callback(function()
+        wezterm.log_info("Either on top or bottom of window.")
+    end)
 end
 
 ---@param window Window
@@ -89,7 +87,6 @@ local function move_neovim_compat(window, pane, direction)
         window:perform_action(move_across_tabs_compat(window, pane, direction), pane)
     end
 end
-return_args.move_neovim_compat = move_neovim_compat
 
 ---@param window Window
 ---@param pane Pane
@@ -102,10 +99,12 @@ local function fullscreen_neovim_compat(window, pane)
                 wezterm.action.SendKey { key = "f", mods = "CTRL" },
             }, pane)
     else
-        window:perform_action(wezterm.action.TogglePaneZoomState, pane)
+        window:perform_action("TogglePaneZoomState", pane)
     end
 end
-return_args.fullscreen_neovim_compat = fullscreen_neovim_compat
 
+local return_args = {}
+return_args.move_neovim_compat = move_neovim_compat
+return_args.fullscreen_neovim_compat = fullscreen_neovim_compat
 
 return return_args
