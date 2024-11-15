@@ -14,6 +14,7 @@ end)
 
 return {
     color_scheme = 'Catppuccin Frappe',
+    max_fps = 100,
     -- tab bar
     -- hide_tab_bar_if_only_one_tab = true,
     tab_bar_at_bottom = true,

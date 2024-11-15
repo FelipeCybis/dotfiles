@@ -101,6 +101,7 @@ local keys = {
     }),
     -- Show list of workspaces
     make_keybinding('Space', 'LEADER', wezterm.action.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' }),
+    make_keybinding('.', 'LEADER', wezterm.action.ShowLauncherArgs { flags = 'FUZZY|DOMAINS' }),
     -- Launch menu
     make_keybinding('p', 'LEADER', wezterm.action.ShowLauncher),
     ---- TABS
