@@ -80,7 +80,7 @@ local keys = {
     -- Attaches the current pane to associated domain
     make_keybinding('a', 'LEADER', wezterm.action.AttachDomain 'mux'),
     -- Detaches the domain associated with the current pane
-    make_keybinding('d', 'LEADER', wezterm.action.DetachDomain 'CurrentPaneDomain'),
+    make_keybinding('d', 'LEADER', wezterm.action.DetachDomain { DomainName = 'mux' }),
     make_keybinding('w', 'LEADER', wezterm.action.PromptInputLine {
         description = wezterm.format {
             { Attribute = { Intensity = 'Bold' } },
