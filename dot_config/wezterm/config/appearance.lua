@@ -4,17 +4,25 @@ local wezterm = require('wezterm') --[[@as Wezterm]]
 wezterm.on('update-right-status', function(window, pane)
     local meta = pane:get_metadata() or {}
 
-    local right_status = " " .. pane:get_domain_name() .. " / " .. window:active_workspace() .. " "
+    local right_status = " domain: " .. pane:get_domain_name() .. " / workspace: " .. window:active_workspace() .. " "
     if meta.is_tardy then
         local secs = meta.since_last_response_ms / 1000.0
         right_status = right_status .. string.format('tardy: %5.1fs⏳', secs)
     end
-    window:set_right_status(right_status)
+    local formated_right_statues = wezterm.format {
+        -- { Attribute = { Underline = 'Single' } },
+        { Attribute = { Intensity = "Bold" } },
+        -- { Background = { Color = '#00ff00' } },
+        { Foreground = { AnsiColor = 'Fuchsia' } },
+        { Text = right_status },
+    }
+    window:set_right_status(formated_right_statues)
 end)
 
 return {
     color_scheme = 'Catppuccin Frappe',
     max_fps = 100,
+    status_update_interval = 300,
     -- tab bar
     -- hide_tab_bar_if_only_one_tab = true,
     tab_bar_at_bottom = true,
@@ -33,8 +41,9 @@ return {
         tab_bar = {
             active_tab = {
                 -- I use a solarized dark theme; this gives a teal background to the active tab
-                fg_color = '#073642',
+                fg_color = '#1a1a1a',
                 bg_color = '#00ff00',
+                intensity = 'Bold',
             }
         },
         split = "#00ff00",
