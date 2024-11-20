@@ -34,6 +34,10 @@ vim.keymap.set("n", "<leader>rc", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left
     { desc = "[r]eplace word intera[c]tively" })
 vim.keymap.set("n", "<leader>rf", ":.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>",
     { desc = "[r]eplace word [f]orward interactively" })
+vim.keymap.set("v", "<leader>rg", '"hy:%s/<C-r>h/<C-r>h/gI<Left><Left><Left>',
+    { desc = "[r]eplace selected text [g]lobally" })
+vim.keymap.set("v", "<leader>rf", '"hy:%s/<C-r>h/<C-r>h/gc<Left><Left><Left>',
+    { desc = "[r]eplace visual [f]orward interactively" })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
