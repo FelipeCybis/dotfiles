@@ -1,78 +1,71 @@
 return {
     "ThePrimeagen/harpoon",
-
     branch = "harpoon2",
-
     dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
+    lazy = true,
+    keys = {
+        {
+            "<leader>hl",
+            function()
+                require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+            end,
+            desc = "[H]arpoon: quick [l]ist",
+        },
 
-    opts = {},
+        {
+            "<leader>ha",
+            function()
+                require("harpoon"):list():add()
+            end,
+            desc = "[H]arpoon: [a]dd",
+        },
 
-    keys = function()
-        local harpoon = require("harpoon")
-        return {
-            {
-                "<leader>hl",
-                function()
-                    harpoon.ui:toggle_quick_menu(harpoon:list())
-                end,
-                desc = "[H]arpoon: quick [l]ist",
-            },
+        {
+            "<C-h>",
+            function()
+                require("harpoon"):list():select(1)
+            end,
+            desc = "Harpoon: select buffer 1"
+        },
 
-            {
-                "<leader>ha",
-                function()
-                    harpoon:list():add()
-                end,
-                desc = "[H]arpoon: [a]dd",
-            },
+        {
+            "<C-j>",
+            function()
+                require("harpoon"):list():select(2)
+            end,
+            desc = "Harpoon: select buffer 2"
+        },
 
-            {
-                "<C-h>",
-                function()
-                    harpoon:list():select(1)
-                end,
-                desc = "Harpoon: select buffer 1"
-            },
+        {
+            "<C-k>",
+            function()
+                require("harpoon"):list():select(3)
+            end,
+            desc = "Harpoon: select buffer 3"
+        },
 
-            {
-                "<C-j>",
-                function()
-                    harpoon:list():select(2)
-                end,
-                desc = "Harpoon: select buffer 2"
-            },
+        {
+            "<C-l>",
+            function()
+                require("harpoon"):list():select(4)
+            end,
+            desc = "Harpoon: select buffer 4"
+        },
+        -- Toggle previous & next buffers stored within Harpoon list
+        {
+            "<C-p>",
+            function()
+                require("harpoon"):list():prev()
+            end,
+            desc = "Harpoon: previous",
+        },
 
-            {
-                "<C-k>",
-                function()
-                    harpoon:list():select(3)
-                end,
-                desc = "Harpoon: select buffer 3"
-            },
-
-            {
-                "<C-l>",
-                function()
-                    harpoon:list():select(4)
-                end,
-                desc = "Harpoon: select buffer 4"
-            },
-            -- Toggle previous & next buffers stored within Harpoon list
-            {
-                "<C-p>",
-                function()
-                    harpoon:list():prev()
-                end,
-                desc = "Harpoon: previous",
-            },
-
-            {
-                "<C-n>",
-                function()
-                    harpoon:list():next()
-                end,
-                desc = "Harpoon: next",
-            },
-        }
-    end,
+        {
+            "<C-n>",
+            function()
+                require("harpoon"):list():next()
+            end,
+            desc = "Harpoon: next",
+        },
+    },
 }

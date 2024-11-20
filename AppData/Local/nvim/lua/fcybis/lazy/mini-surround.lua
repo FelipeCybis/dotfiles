@@ -1,6 +1,7 @@
 return {
     "echasnovski/mini.surround",
     version = "*",
+    event = "VeryLazy",
     config = {
         mappings = {
             add = "<leader>sa",       -- Add surroundng in Normal and Visual modes
