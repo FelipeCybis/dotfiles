@@ -8,7 +8,7 @@ return {
     config = function()
         require("lualine").setup {
             options = {
-                disabled_filetypes = { "packer", "NVimTree", "undotree", "starter" },
+                disabled_filetypes = { "packer", "NVimTree", "undotree", "starter", "snacks_dashboard" },
             },
             sections = {
                 lualine_a = { 'filename', 'mode' },
