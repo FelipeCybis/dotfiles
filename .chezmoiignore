@@ -21,5 +21,4 @@ README.md
 .glzr/
 vimfiles/
 Documents/
-AppData/
 {{ end }}
