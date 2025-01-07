@@ -94,70 +94,63 @@ return {
             -- if there is a language server active in the file
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP actions',
-                callback = function(event)
-                    local bufnr = event.buf
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if not client then return end
+                    local bufnr = args.buf
+                    local lsp = vim.lsp.buf
 
-                    ---@return vim.keymap.set.Opts
-                    local opts = function(desc)
-                        if desc == nil then
-                            return { buffer = bufnr }
-                        else
-                            return { buffer = bufnr, desc = desc }
+                    local map = function(mode, lhs, rhs, opts)
+                        if opts.buffer == nil then
+                            opts.buffer = bufnr
                         end
+                        vim.keymap.set(mode, lhs, rhs, opts)
                     end
+                    map('n', 'gy', function() lsp.type_definition() end, { desc = "LSP: [g]oto t[y]pe def" })
+                    map('n', 'gd', function() lsp.definition() end, { desc = "LSP: [g]oto [d]efinition" })
+                    map('n', 'gs', function() lsp.signature_help() end, { desc = "LSP: [g]oto [s]ignature" })
 
-                    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts())
-                    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts())
-                    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts())
-
-                    vim.keymap.set("n", "gr", "<cmd>FzfLua lsp_references<CR>", opts("LSP [g]oto [r]eferences"))
-                    vim.keymap.set("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<CR>", opts("[L]SP [d]efinitions"))
-                    vim.keymap.set("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>",
-                        opts("[C]ode [a]ctions"))
-                    vim.keymap.set("n", "<leader>ls", "<cmd>FzfLua lsp_document_symbols<CR>",
-                        opts("[L]SP [s]ymbols"))
-                    vim.keymap.set("n", "<leader>lx", "<cmd>FzfLua lsp_document_diagnostics<CR>",
-                        opts("[L]SP diagnostic[x]"))
+                    map("n", "gr", "<cmd>FzfLua lsp_references<CR>", { desc = "LSP [g]oto [r]eferences" })
+                    map("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<CR>", { desc = "[L]SP [d]efinitions" })
+                    map("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>", { desc = "[C]ode [a]ctions" })
+                    map("n", "<leader>ls", "<cmd>FzfLua lsp_document_symbols<CR>", { desc = "[L]SP [s]ymbols" })
+                    map("n", "<leader>lx", "<cmd>FzfLua lsp_document_diagnostics<CR>", { desc = "[L]SP diagnostic[x]" })
                     -- Other mappings to be used by any LSP
-                    vim.keymap.set("n", "<leader>lf", function()
-                        vim.lsp.buf.format({ async = true })
-                    end, opts("[L]SP [f]ormat buffer"))
+                    map("n", "<leader>lf", function() lsp.format({ async = true }) end,
+                        { desc = "[L]SP [f]ormat buffer" })
                     -- Toggle inlay hints
-                    vim.keymap.set("n", "<leader>li", function()
+                    map("n", "<leader>li", function()
                         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
-                    end, opts("[L]SP [i]nlay hints"))
+                    end, { desc = "[L]SP [i]nlay hints" })
+
+                    if client.supports_method("textDocument/formatting") then
+                        -- Format on save
+                        vim.api.nvim_create_autocmd("BufWritePre", {
+                            buffer = bufnr,
+                            callback = function()
+                                lsp.format({ bufnr = bufnr, id = client.id })
+                            end,
+                        })
+                    end
                 end,
             })
         end,
-
     },
     {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
         dependencies = {
             { 'gonstoll/wezterm-types', lazy = true },
+            { "Bilal2453/luvit-meta",   lazy = true }, -- optional `vim.uv` typings
         },
         opts = {
             library = {
-                -- See the configuration section for more details
                 -- Load luvit types when the `vim.uv` word is found
                 { path = "luvit-meta/library", words = { "vim%.uv" } },
                 -- Load the wezterm types when the `wezterm` module is required
                 { path = 'wezterm-types',      mods = { 'wezterm' } },
             },
         },
-    },
-    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-    {                                        -- optional cmp completion source for require statements and module annotations
-        "hrsh7th/nvim-cmp",
-        lazy = true,
-        opts = function(_, opts)
-            opts.sources = opts.sources or {}
-            table.insert(opts.sources, {
-                name = "lazydev",
-                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-            })
-        end,
     },
     {
         'saghen/blink.cmp',
@@ -171,15 +164,9 @@ return {
                 version = "*",
             },
         },
-
         version = 'v0.*',
 
         opts = {
-            -- 'default' for mappings similar to built-in completion
-            -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-            -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
-            -- see the "default configuration" section below for full documentation on how to define
-            -- your own keymap.
             keymap = {
                 ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
                 ['<C-e>'] = { 'cancel', 'fallback' },
@@ -198,12 +185,7 @@ return {
             },
 
             appearance = {
-                -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-                -- Useful for when your theme doesn't support blink.cmp
-                -- will be removed in a future release
                 use_nvim_cmp_as_default = false,
-                -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-                -- Adjusts spacing to ensure icons are aligned
                 nerd_font_variant = 'mono'
             },
 
@@ -211,12 +193,9 @@ return {
             -- elsewhere in your config, without redefining it, via `opts_extend`
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
-                -- optionally disable cmdline completions
-                -- cmdline = {},
                 providers = {
                     -- dont show LuaLS require statements when lazydev has items
-                    lsp = { fallback_for = { "lazydev" } },
-                    lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
+                    lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100, fallbacks = { "lsp" } },
                 },
             },
             -- experimental signature help support
@@ -225,7 +204,7 @@ return {
                 menu = {
                     border = "padded",
                     draw = {
-                        columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1} },
+                        columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
                         treesitter = { "lsp" },
                     }
                 },
