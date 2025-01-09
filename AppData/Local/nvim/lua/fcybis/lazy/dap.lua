@@ -17,6 +17,14 @@ return {
         config = function()
             -- Python dap setup
             require("dap-python").setup(vim.fn.stdpath('config') .. "\\debugpy_venv\\Scripts\\python.exe")
+            table.insert(require('dap').configurations.python, {
+                type = 'python',
+                request = 'launch',
+                name = 'External code debugging',
+                program = '${file}',
+                justMyCode = false,
+                -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+            })
 
             -- Signs
             for _, group in pairs({
