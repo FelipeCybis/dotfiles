@@ -70,3 +70,5 @@ map("v", ">", ">gv")
 map("n", "<leader><leader>x", "<cmd>source %<cr>", { desc = "Source current file" })
 map("n", "<leader>xl", ":.lua<cr>", { desc = "R[x]un [l]ua line" })
 map("v", "<leader>xl", ":lua<cr>", { desc = "R[x]un [l]ua: visual sel" })
+
+map("n", "<leader>xd", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Diagnostics popup" })
