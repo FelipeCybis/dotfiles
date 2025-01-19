@@ -11,7 +11,8 @@ return {
                     return {
                         ["@lsp.type.namespace.python"] = { fg = frappe.yellow },
                         Type = { fg = frappe.yellow, style = { "italic" } },
-                        Function = { fg = frappe.blue, style = { "italic" } }
+                        Function = { fg = frappe.blue, style = { "italic" } },
+                        ["@lsp.type.ref.typst"] = { fg = frappe.yellow },
                     }
                 end
             }
