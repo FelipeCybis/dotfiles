@@ -85,3 +85,5 @@ if os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil then
         },
     }
 end
+
+vim.lsp.set_log_level("off")
