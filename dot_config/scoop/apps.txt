@@ -1,6 +1,7 @@
 7zip
 bat
 btop
+chafa
 chezmoi
 delta
 dust
@@ -11,6 +12,7 @@ fzf
 git-aliases
 hyperfine
 jq
+just
 lazygit
 less
 lsd
@@ -25,6 +27,7 @@ psfzf
 ripgrep
 sd
 starship
+television
 tlrc
 unar
 uutils-coreutils
