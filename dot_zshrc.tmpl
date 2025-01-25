@@ -8,15 +8,14 @@ zstyle ':omz:update' frequency 13
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+# Enable vim mode in zsh
+bindkey -v
+
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-syntax-highlighting"
-
-# Load and initialise completion system
-autoload -Uz compinit
-compinit
 
 {{ if ne .chezmoi.os "darwin" }}
 # everything installed with brew should come after this
@@ -24,10 +23,6 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source "$HOME/.config/space/space_aliases.sh"
 {{ end }}
 
-eval "$(zoxide init zsh)"
-
-plug "$HOME/.config/zsh/exports.zsh"
 plug "$HOME/.config/zsh/aliases.zsh"
+plug "$HOME/.config/zsh/exports.zsh"
 
-
-eval "$(starship init zsh)"
