@@ -3,7 +3,7 @@ return {
     ssh_domains = {
         {
             name = "labo",
-            remote_address = "10.113.113.118",
+            remote_address = "10.113.113.60",
             username = "Felipe",
 
         }
