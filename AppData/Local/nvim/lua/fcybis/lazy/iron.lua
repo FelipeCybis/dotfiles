@@ -10,7 +10,13 @@ return {
 
                 repl_definition = {
                     sh = {
-                        command = { "pwsh" },
+                        command = function()
+                            if vim.fn.has('win32') == 1 then
+                                return { "pwsh", "-NoProfile" }
+                            else
+                                return { "zsh" }
+                            end
+                        end,
                     },
                     python = {
                         command = { "ipython", "--no-autoindent" },
