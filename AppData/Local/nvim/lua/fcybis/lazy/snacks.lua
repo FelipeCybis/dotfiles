@@ -38,7 +38,7 @@ return {
             enabled = true,
             timeout = 3000,
         },
-        animations = { enabled = true },
+        animate = { enabled = true },
         indent = { enabled = true },
         input = { enabled = true },
         quickfile = { enabled = true },
@@ -63,7 +63,7 @@ return {
             { '<leader>cR', function() Snacks.rename.rename_file() end, desc = 'Rename File' },
             { '<leader>ts', function() Snacks.terminal() end,           desc = '[t]erminal [s]plit' },
             { "<leader>.",  function() Snacks.scratch() end,            desc = "Toggle Scratch Buffer" },
-            { "<leader>ss",  function() Snacks.scratch.select() end,     desc = "Select Scratch Buffer" },
+            { "<leader>ss", function() Snacks.scratch.select() end,     desc = "Select Scratch Buffer" },
             {
                 '<leader>tt',
                 function()
