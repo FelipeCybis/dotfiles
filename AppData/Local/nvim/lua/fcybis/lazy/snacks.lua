@@ -5,39 +5,7 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
-    dashboard = {
-      enabled = true,
-      preset = {
-        keys = {
-          { icon = ' ', key = 'f', desc = 'Find File', action = ':lua Snacks.dashboard.pick("files")' },
-          { icon = ' ', key = 'n', desc = 'New File', action = ':ene | startinsert' },
-          { icon = ' ', key = 'g', desc = 'Find Text', action = ':lua Snacks.dashboard.pick("live_grep ")' },
-          { icon = ' ', key = 'r', desc = 'Recent Files', action = ':lua Snacks.dashboard.pick("oldfiles ")' },
-          { icon = ' ', key = 'c', desc = 'Dotfiles', action = ':lua Fzf_Chezmoi()' },
-          { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
-          { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
-          { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
-        },
-        header = [[
-███████╗ ██████╗██╗   ██╗██████╗ ██╗███████╗
-██╔════╝██╔════╝╚██╗ ██╔╝██╔══██╗██║██╔════╝
-█████╗  ██║      ╚████╔╝ ██████╔╝██║███████╗
-██╔══╝  ██║       ╚██╔╝  ██╔══██╗██║╚════██║
-██║     ╚██████╗   ██║   ██████╔╝██║███████║
-╚═╝      ╚═════╝   ╚═╝   ╚═════╝ ╚═╝╚══════╝]],
-      },
-      sections = {
-        { section = 'header' },
-        { section = 'keys', gap = 1, padding = 1 },
-        { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 4, padding = 1 },
-        { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 4, padding = 1 },
-        { section = 'startup' },
-      },
-    },
-    notifier = {
-      enabled = true,
-      timeout = 3000,
-    },
+    notifier = { enabled = true },
     animate = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
@@ -45,60 +13,37 @@ return {
     statuscolumn = { enabled = true },
     words = { enabled = true },
     scratch = { enabled = true },
+    scroll = { enabled = false, animate = { duration = { step = 10, total = 60 } } },
     styles = {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
     },
+    toggle = { enabled = true, icon = { enabled = " ", disabled = " " } }
   },
   keys = function()
     -- requiring Snacks here only to have lsp info available
     local Snacks = require('snacks')
+    local shell = (vim.fn.has('win32') == 1) and "pwsh" or "zsh"
     return {
-      { '<leader>dn', function() Snacks.notifier.hide() end,          desc = '[d]ismiss [n]otifications' },
-      { '<leader>bd', function() Snacks.bufdelete() end,              desc = '[b]uffer [d]elete' },
-      { '<leader>lg', function() Snacks.lazygit() end,                desc = '[L]azy[g]it' },
-      { '<leader>gl', function() Snacks.git.blame_line() end,         desc = '[g]it blame [l]ine' },
-      { '<leader>gr', function() Snacks.gitbrowse() end,              desc = '[g]it [r]emote url' },
-      { '<leader>cR', function() Snacks.rename.rename_file() end,     desc = 'Rename File' },
-      { '<leader>ts', function() Snacks.terminal() end,               desc = '[t]erminal [s]plit' },
-      { '<leader>.',  function() Snacks.scratch() end,                desc = 'Toggle Scratch Buffer' },
-      { '<leader>ss', function() Snacks.scratch.select() end,         desc = 'Select Scratch Buffer' },
-      { '<leader>tr', function() Snacks.picker.explorer() end,        desc = 'Toggle [tr]ee' },
-      { '<leader>sc', function() Snacks.picker.command_history() end, desc = '[s]earch [c]ommand history' },
-      { '<leader>s/', function() Snacks.picker.search_history() end,  desc = '[s]earch [/]search history' },
-      {
-        '<leader>tt',
-        function()
-          local cmd = 'zsh'
-          if vim.fn.has('win32') == 1 then
-            cmd = 'pwsh'
-          end
-          Snacks.terminal.toggle(cmd)
-        end,
-        desc = '[t]oggle [t]erminal floating',
-      },
-      { ']]',         function() Snacks.words.jump(vim.v.count1) end,  desc = 'Next Reference (snacks)' },
-      { '[[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference (snacks)' },
-      { '<leader>NH', function() Snacks.notifier.show_history() end,   desc = '[N]otifier [H]istory' },
-      {
-        '<leader>NN',
-        desc = '[N]eovim [N]ews',
-        function()
-          Snacks.win({
-            file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
-            width = 0.6,
-            height = 0.6,
-            wo = {
-              spell = false,
-              wrap = false,
-              signcolumn = 'yes',
-              statuscolumn = ' ',
-              conceallevel = 3,
-            },
-          })
-        end,
-      },
+      { '<leader>dn', function() Snacks.notifier.hide() end,           desc = '[d]ismiss [n]otifications' },
+      { '<leader>bd', function() Snacks.bufdelete() end,               desc = '[b]uffer: [d]elete' },
+      { '<leader>bs', function() Snacks.scratch() end,                 desc = '[b]uffer: make [s]cratch' },
+      { '<leader>lg', function() Snacks.lazygit() end,                 desc = '[L]azy[g]it' },
+      { '<leader>gl', function() Snacks.git.blame_line() end,          desc = '[g]it: blame [l]ine' },
+      { '<leader>gr', function() Snacks.gitbrowse() end,               desc = '[g]it: [r]emote url' },
+      { '<leader>lR', function() Snacks.rename.rename_file() end,      desc = '[l]SP: [R]ename File' },
+      { '<leader>et', function() Snacks.picker.explorer() end,         desc = '[e]xplorer: [t]ree' },
+      { '<leader>tt', function() Snacks.terminal.toggle(shell) end,    desc = '[t]erminal: [t]oggle floating' },
+      { '<leader>ts', function() Snacks.terminal() end,                desc = '[t]erminal: [s]plit' },
+      { ']n',         function() Snacks.words.jump(vim.v.count1) end,  desc = 'Next Reference (snacks)' },
+      { '[n',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference (snacks)' },
+      { "<leader>fl", function() Snacks.picker.lazy() end,             desc = "[f]ind: [l]azy cfg files" },
+      { "<leader>fP", function() Snacks.picker.projects() end,         desc = "[f]ind: [P]rojects" },
+      { "<leader>fr", function() Snacks.picker.recent() end,           desc = "[f]ind: [r]ecent" },
+      { "<leader>si", function() Snacks.picker.icons() end,            desc = "[s]earch: [i]cons" },
+      { '<leader>ss', function() Snacks.scratch.select() end,          desc = '[s]earch: [s]cratch Buffer' },
+      { '<leader>sn', function() Snacks.notifier.show_history() end,   desc = '[s]earch: [n]otifier history' },
     }
   end,
   init = function()
@@ -123,7 +68,7 @@ return {
         Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
             :map('<leader>uc')
         Snacks.toggle.treesitter():map('<leader>uT')
-        Snacks.toggle.inlay_hints():map('<leader>uh')
+        Snacks.toggle.scroll():map('<leader>uS')
       end,
     })
   end,

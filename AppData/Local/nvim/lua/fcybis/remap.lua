@@ -29,26 +29,49 @@ map("n", "<leader>Y", "\"+Y")
 map("n", "<leader>p", "\"*p")
 map("v", "<leader>p", "\"*p")
 
-map("n", "<leader>rg", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>",
-    { desc = "[r]eplace word [g]lobally" })
-map("n", "<leader>rc", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>",
-    { desc = "[r]eplace word intera[c]tively" })
-map("n", "<leader>rf", ":.,$s/\\<<C-r><C-w>\\>/<C-r><C-w>/gc<Left><Left><Left>",
-    { desc = "[r]eplace word [f]orward interactively" })
-map("v", "<leader>rg", '"hy:%s/<C-r>h/<C-r>h/gI<Left><Left><Left>',
-    { desc = "[r]eplace selected text [g]lobally" })
-map("v", "<leader>rf", '"hy:.,$s/<C-r>h/<C-r>h/gc<Left><Left><Left>',
-    { desc = "[r]eplace visual [f]orward interactively" })
+local replace_pattern = function(mode, flag)
+  local init_pattern = ":%" -- current file
+  if flag == "forward" then
+    init_pattern = ":.,$"   -- from current line to end of file
+  elseif flag == "line" then
+    init_pattern = ":"      -- current line
+  end
+  if mode == "v" then
+    init_pattern = '"hy' .. init_pattern -- copy visual selection to register h
+  end
+
+  local replace_selection = "\\<<C-r><C-w>\\>/<C-r><C-w>" -- whole word
+  if mode == "v" then
+    replace_selection = "<C-r>h/<C-r>h"                   -- visual selection
+  end
+
+  local end_flag = "/gc" -- confirm each substitution
+  if flag == "global" or flag == "line" then
+    end_flag = "/gI"     -- global, case-sensitive
+  end
+
+
+  return init_pattern .. "s/" .. replace_selection .. end_flag .. "<Left><Left><Left>"
+end
+-- Replace_pattern
+map("n", "<leader>rwg", replace_pattern("n", "global"), { desc = "[r]eplace [w]ord or selection: [g]lobally" })
+map("n", "<leader>rwi", replace_pattern("n", "interactive"), { desc = "[r]eplace [w]ord or selection: [i]nteractively" })
+map("n", "<leader>rwf", replace_pattern("n", "forward"), { desc = "[r]eplace [w]ord or selection: [f]orward" })
+map("n", "<leader>rwl", replace_pattern("n", "line"), { desc = "[r]eplace [w]ord or selection: current [l]ine" })
+map("v", "<leader>rwg", replace_pattern("v", "global"), { desc = "[r]eplace [w]ord or selection: [g]lobally" })
+map("v", "<leader>rwi", replace_pattern("v", "interactive"), { desc = "[r]eplace [w]ord or selection: [i]nteractively" })
+map("v", "<leader>rwf", replace_pattern("v", "forward"), { desc = "[r]eplace [w]ord or selection: [f]orward" })
+map("v", "<leader>rwl", replace_pattern("v", "line"), { desc = "[r]eplace [w]ord or selection: current [l]ine" })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
 -- Save file faster using leader key
@@ -71,4 +94,4 @@ map("n", "<leader><leader>x", "<cmd>source %<cr>", { desc = "Source current file
 map("n", "<leader>xl", ":.lua<cr>", { desc = "R[x]un [l]ua line" })
 map("v", "<leader>xl", ":lua<cr>", { desc = "R[x]un [l]ua: visual sel" })
 
-map("n", "<leader>xd", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Diagnostics popup" })
+map("n", "<leader>cd", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "[c]ode: [d]iagnostics popup" })
