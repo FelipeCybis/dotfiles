@@ -4,22 +4,24 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    bigfile = { enabled = true },
-    notifier = { enabled = true },
     animate = { enabled = true },
+    bigfile = { enabled = true },
+    explorer = { enabled = true, replace_netrw = true },
     indent = { enabled = true },
     input = { enabled = true },
+    notifier = { enabled = true },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = true },
-    words = { enabled = true },
     scratch = { enabled = true },
     scroll = { enabled = false, animate = { duration = { step = 10, total = 60 } } },
+    statuscolumn = { enabled = true },
     styles = {
+      ---@diagnostic disable-next-line
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
     },
-    toggle = { enabled = true, icon = { enabled = " ", disabled = " " } }
+    toggle = { enabled = true, icon = { enabled = " ", disabled = " " } },
+    words = { enabled = true },
   },
   keys = function()
     -- requiring Snacks here only to have lsp info available
