@@ -3,7 +3,6 @@ return {
   event = 'VeryLazy',
   dependencies = { 'nvim-lua/plenary.nvim', 'ibhagwan/fzf-lua' },
   config = function()
-    local Path = require("plenary.path")
     local chezmoi_pattern = os.getenv("HOME") or os.getenv("USERPROFILE") or "~"
     chezmoi_pattern = chezmoi_pattern:gsub("\\", "/") .. "/.local/share/chezmoi/*"
     require("chezmoi").setup {
@@ -29,7 +28,9 @@ return {
         end,
       }),
     }
-
+  end,
+  keys = function()
+    local Path = require("plenary.path")
     local fzf_lua = require("fzf-lua")
     Chezmoi_files = function()
       local full_list = require("chezmoi.commands").list()
@@ -47,6 +48,7 @@ return {
         prompt    = "Chezmoi Files> ",
         previewer = "builtin",
         actions   = {
+          ---@diagnostic disable-next-line: unused-local
           ['default'] = function(selected, opts)
             require("chezmoi.commands").edit({
               targets = { selected[1] },
@@ -64,10 +66,13 @@ return {
         actions = fzf_lua.defaults.actions.files,
       })
     end
-
-    vim.api.nvim_command('command! ChezmoiFzf lua Fzf_Chezmoi()')
-    vim.keymap.set('n', '<leader>fc', '<CMD>ChezmoiFzf<CR>', { desc = "[f]ind: [c]hezmoi files" })
-    vim.api.nvim_command('command! ChezmoiRg lua Rg_Chezmoi()')
-    vim.keymap.set('n', '<leader>sC', '<CMD>ChezmoiRg<CR>', { desc = "[s]earch: grep [C]hezmoi" })
+    local Snacks = require("snacks")
+    local chezmoi_dir = Path:new("~/.local/share/chezmoi"):expand()
+    local lazygit_args = { args = { "--path", chezmoi_dir } }
+    return {
+      { '<leader>fc', Fzf_Chezmoi,                                      desc = '[f]ind: [c]hezmoi files' },
+      { '<leader>sC', Rg_Chezmoi,                                       desc = '[s]earch: grep [C]hezmoi' },
+      { '<leader>lc', function() Snacks.lazygit.open(lazygit_args) end, desc = '[l]azygit: [c]hezmoi' },
+    }
   end,
 }
