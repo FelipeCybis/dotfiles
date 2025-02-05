@@ -33,7 +33,7 @@ return {
         desc = "[c]ode: Trouble [s]ymbols",
       },
       {
-        "]]",
+        "]<tab>",
         move_and_jump(trouble.next),
         desc = "Next Trouble item",
       },
@@ -43,7 +43,7 @@ return {
         desc = "[g]oto: last Trouble item",
       },
       {
-        "[[",
+        "[<tab>",
         move_and_jump(trouble.prev),
         desc = "Previous Trouble item",
       },
