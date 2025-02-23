@@ -2,6 +2,7 @@
 
 if (Get-Command wezterm -errorAction SilentlyContinue){
     [System.Environment]::SetEnvironmentVariable('TERMINAL','wezterm')
+    [System.Environment]::SetEnvironmentVariable('TERM','wezterm')
 }
 
 if (Get-Command bat -errorAction SilentlyContinue)
