@@ -15,6 +15,7 @@ return {
           "lua_ls",
           "ruff",
           "tinymist",
+          "harper_ls",
         },
         handlers = {
           lua_ls = function() require("lspconfig").lua_ls.setup({}) end,
@@ -78,6 +79,22 @@ return {
             -- create a nvim command to execute a lsp buf command
             vim.api.nvim_command(
               "command! TinymistpinMain lua vim.lsp.buf.execute_command({ command = 'tinymist.pinMain', arguments = { vim.api.nvim_buf_get_name(0) } })")
+          end,
+          harper_ls = function()
+            require("lspconfig").harper_ls.setup({
+              filetypes = { "typst", "markdown", "gitcommit", "lua" },
+              settings = {
+                ["harper-ls"] = {
+                  linters = {
+                    Spaces = false,
+                  },
+                  codeActions = {
+                    ForceStable = true
+                  },
+                  diagnosticSeverity = "hint" -- "information", "warning", or "error"
+                }
+              },
+            })
           end,
         },
       })
