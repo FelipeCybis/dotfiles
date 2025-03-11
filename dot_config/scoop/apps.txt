@@ -18,7 +18,7 @@ less
 lsd
 lsd-aliases
 mingw
-neovim
+neovim-nightly
 nodejs
 nu
 poppler
