@@ -6,10 +6,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 
-# Rye
-source "$HOME/.rye/env"
-eval "$(rye self completion -s zsh)"
-
 # Cargo
 source "$HOME/.cargo/env"
 
@@ -17,6 +13,8 @@ source "$HOME/.cargo/env"
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# uv completions
+eval "$(uv generate-shell-completion zsh)"
 
 eval "$(zoxide init zsh)"
 
