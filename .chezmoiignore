@@ -4,6 +4,7 @@ README.md
 {{ if eq .chezmoi.os "windows" }}
 .zshrc
 .config/zsh
+.config/zellij
 .config/brew
 .vim/
 {{ end }}
