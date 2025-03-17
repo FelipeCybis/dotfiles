@@ -5,4 +5,9 @@ return {
   build = function()
     require("typst-preview").update()
   end,
+  config = function()
+    require("typst-preview").setup({
+      debug = true,
+    })
+  end,
 }
