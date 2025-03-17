@@ -105,10 +105,6 @@ return {
                 end, 0)
               end
             end, {})
-            -- vim.api.nvim_create_user_command("TinymistpinMain", function()
-            --   local filepath = vim.api.nvim_buf_get_name(0)
-            --   vim.lsp.buf.execute_command({ command = "tinymist.pinMain", arguments = { filepath } })
-            -- end, {})
           end,
           harper_ls = function()
             require("lspconfig").harper_ls.setup({
