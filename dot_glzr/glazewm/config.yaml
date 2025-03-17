@@ -126,21 +126,24 @@ window_rules:
       - window_process: { equals: 'python' }
         window_title: { regex: 'Figure*' }
 
+      - window_process: { equals: 'msrdc' }
+        window_title: { regex: 'Figure*' }
+
 binding_modes:
-  # # When enabled, the focused window can be resized via arrow keys or HJKL.
-  # - name: 'resize'
-  #   keybindings:
-  #     - commands: ['resize --width -2%']
-  #       bindings: ['h', 'left']
-  #     - commands: ['resize --width +2%']
-  #       bindings: ['l', 'right']
-  #     - commands: ['resize --height +2%']
-  #       bindings: ['k', 'up']
-  #     - commands: ['resize --height -2%']
-  #       bindings: ['j', 'down']
-  #     # Press enter/escape to return to default keybindings.
-  #     - commands: ['wm-disable-binding-mode --name resize']
-  #       bindings: ['escape', 'enter']
+  # When enabled, the focused window can be resized via arrow keys or HJKL.
+  - name: 'resize'
+    keybindings:
+      - commands: ['resize --width -2%']
+        bindings: ['h', 'left']
+      - commands: ['resize --width +2%']
+        bindings: ['l', 'right']
+      - commands: ['resize --height +2%']
+        bindings: ['k', 'up']
+      - commands: ['resize --height -2%']
+        bindings: ['j', 'down']
+      # Press enter/escape to return to default keybindings.
+      - commands: ['wm-disable-binding-mode --name resize']
+        bindings: ['escape', 'enter', 'alt+r']
 
   # When enabled, all keybindings are disabled except for alt+shift+p which
   # returns to default keybindings.
@@ -170,21 +173,21 @@ keybindings:
   - commands: ['move --direction down']
     bindings: ['alt+shift+j', 'alt+shift+down']
 
-  # Resize focused window by a percentage or pixel amount.
-  - commands: ['resize --width -2%']
-    bindings: ['alt+u']
-  - commands: ['resize --width +2%']
-    bindings: ['alt+p']
-  - commands: ['resize --height +2%']
-    bindings: ['alt+o']
-  - commands: ['resize --height -2%']
-    bindings: ['alt+i']
+  # # Resize focused window by a percentage or pixel amount.
+  # - commands: ['resize --width -2%']
+  #   bindings: ['alt+u']
+  # - commands: ['resize --width +2%']
+  #   bindings: ['alt+p']
+  # - commands: ['resize --height +2%']
+  #   bindings: ['alt+o']
+  # - commands: ['resize --height -2%']
+  #   bindings: ['alt+i']
 
-  # # As an alternative to the resize keybindings above, resize mode enables
-  # # resizing via arrow keys or HJKL. The binding mode is defined above with
-  # # the name 'resize'.
-  # - commands: ['wm-enable-binding-mode --name resize']
-  #   bindings: ['alt+r']
+  # As an alternative to the resize keybindings above, resize mode enables
+  # resizing via arrow keys or HJKL. The binding mode is defined above with
+  # the name 'resize'.
+  - commands: ['wm-enable-binding-mode --name resize']
+    bindings: ['alt+r']
 
   # Disables all keybindings until alt+shift+p is pressed again.
   - commands: ['wm-enable-binding-mode --name pause']
@@ -209,7 +212,7 @@ keybindings:
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
-    bindings: ['alt+f']
+    bindings: ['alt+shift+t']
 
   # Minimize focused window.
   - commands: ['toggle-minimized']

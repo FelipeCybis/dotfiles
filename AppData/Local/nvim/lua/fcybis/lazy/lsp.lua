@@ -77,8 +77,38 @@ return {
               },
             })
             -- create a nvim command to execute a lsp buf command
-            vim.api.nvim_command(
-              "command! TinymistpinMain lua vim.lsp.buf.execute_command({ command = 'tinymist.pinMain', arguments = { vim.api.nvim_buf_get_name(0) } })")
+            vim.api.nvim_create_user_command("TinymistpinMain", function()
+              local tinymist_id = nil
+              for _, client in pairs(vim.lsp.get_clients()) do
+                if client.name == "tinymist" then
+                  tinymist_id = client.id
+                  break
+                end
+              end
+
+              if not tinymist_id then
+                vim.notify("Tinymist not running!", vim.log.levels.ERROR)
+                return
+              end
+
+              local client = vim.lsp.get_client_by_id(tinymist_id)
+              if client then
+                client.request("workspace/executeCommand", {
+                  command = "tinymist.pinMain",
+                  arguments = { vim.api.nvim_buf_get_name(0) },
+                }, function(err)
+                  if err then
+                    vim.notify("Error pinning: " .. err, vim.log.levels.ERROR)
+                  else
+                    vim.notify("Succesfully pinned!", vim.log.levels.INFO)
+                  end
+                end, 0)
+              end
+            end, {})
+            -- vim.api.nvim_create_user_command("TinymistpinMain", function()
+            --   local filepath = vim.api.nvim_buf_get_name(0)
+            --   vim.lsp.buf.execute_command({ command = "tinymist.pinMain", arguments = { filepath } })
+            -- end, {})
           end,
           harper_ls = function()
             require("lspconfig").harper_ls.setup({
