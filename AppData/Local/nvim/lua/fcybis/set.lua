@@ -4,9 +4,9 @@ vim.g.maplocalleader = ' '
 
 -- Set python neovim path
 if vim.fn.has('win32') == 1 then
-    vim.g.python3_host_prog = vim.fn.stdpath('config') .. "\\nvim_venv\\Scripts\\python.exe"
+  vim.g.python3_host_prog = vim.fn.stdpath('config') .. "\\nvim_venv\\Scripts\\python.exe"
 else
-    vim.g.python3_host_prog = vim.fn.stdpath('config') .. "/nvim_venv/bin/python3"
+  vim.g.python3_host_prog = vim.fn.stdpath('config') .. "/nvim_venv/bin/python3"
 end
 
 vim.opt.nu = true
@@ -16,14 +16,14 @@ vim.opt.relativenumber = true
 vim.opt.undofile = true
 
 if vim.fn.has('win32') == 1 then
-    -- Set stuff to work well on powershell
-    vim.opt.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
-    vim.opt.shellcmdflag =
-    '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
-    vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-    vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-    vim.opt.shellquote = ''
-    vim.opt.shellxquote = ''
+  -- Set stuff to work well on powershell
+  vim.opt.shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell'
+  vim.opt.shellcmdflag =
+  '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[\'Out-File:Encoding\']=\'utf8\';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
+  vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+  vim.opt.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+  vim.opt.shellquote = ''
+  vim.opt.shellxquote = ''
 end
 
 -- Indentation and spaces
@@ -66,24 +66,24 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.cursorline = true
 
 if os.getenv("SSH_CLIENT") ~= nil or os.getenv("SSH_TTY") ~= nil then
-    local function my_paste(_)
-        return function(_)
-            local content = vim.fn.getreg('"')
-            return vim.split(content, '\n')
-        end
+  local function my_paste(_)
+    return function(_)
+      local content = vim.fn.getreg('"')
+      return vim.split(content, '\n')
     end
+  end
 
-    vim.g.clipboard = {
-        name = "OSC 52",
-        copy = {
-            ["+"] = require("vim.ui.clipboard.osc52").copy "+",
-            ["*"] = require("vim.ui.clipboard.osc52").copy "*",
-        },
-        paste = {
-            ["+"] = my_paste "+",
-            ["*"] = my_paste "*",
-        },
-    }
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy "+",
+      ["*"] = require("vim.ui.clipboard.osc52").copy "*",
+    },
+    paste = {
+      ["+"] = my_paste "+",
+      ["*"] = my_paste "*",
+    },
+  }
 end
 
 vim.lsp.set_log_level("off")
