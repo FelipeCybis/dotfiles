@@ -7,6 +7,11 @@
 
 [core]
     pager = delta
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+	sshcommand = ssh.exe
+{{   end }}
+{{ end }}
 
 [interactive]
     diffFilter = delta --color-only
@@ -23,3 +28,9 @@
 
 [credential "https://github.com"]
     username = FelipeCybis
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
