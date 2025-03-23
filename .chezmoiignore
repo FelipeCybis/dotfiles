@@ -2,6 +2,7 @@ LICENSE
 README.md
 
 {{ if eq .chezmoi.os "windows" }}
+.chezmoiscripts/*.sh
 .zshrc
 .config/zsh
 .config/zellij

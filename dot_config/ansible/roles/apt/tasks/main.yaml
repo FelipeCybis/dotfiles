@@ -1,0 +1,10 @@
+---
+- name: Install packages with apt
+  become: true
+  ansible.builtin.apt:
+    name:
+      - git
+      - build-essential
+      - zsh
+      - curl
+    state: present

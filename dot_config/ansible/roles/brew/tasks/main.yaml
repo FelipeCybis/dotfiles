@@ -1,0 +1,9 @@
+---
+- name: Update Homebrew
+  community.general.homebrew:
+    update_homebrew: true
+  when: ansible_os_family == 'Darwin' or ansible_distribution == 'Ubuntu'
+
+- name: Install Homebrew apps
+  ansible.builtin.shell: "brew bundle --file={{ ansible_env.HOME }}/.config/brew/Brewfile"
+  when: ansible_os_family == 'Darwin' or ansible_distribution == 'Ubuntu'
