@@ -1,0 +1,20 @@
+---
+- name: Ensure nvim config dir exists
+  when: ansible_os_family == 'Darwin' or ansible_distribution == 'Ubuntu'
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/nvim"
+    state: directory
+
+- name: Find all files in source directory
+  ansible.builtin.find:
+    paths: "{{ ansible_env.HOME }}/AppData/Local/nvim"
+    file_type: any
+  register: nvim_files
+
+- name: Create symlinks for all files and directories
+  ansible.builtin.file:
+    src: "{{ item.path }}"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/{{ item.path | basename }}"
+    state: link
+    force: yes
+  loop: "{{ nvim_files.files }}"
