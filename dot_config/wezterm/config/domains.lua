@@ -6,6 +6,13 @@ return {
       remote_address = "10.113.113.60",
       username = "Felipe",
 
+    },
+    {
+      name = "labo_wsl",
+      remote_address = "10.113.113.60",
+      username = "Felipe",
+      multiplexing = "None",
+      default_prog = { "wsl.exe", "-d", "ubuntu-22.04", "--cd", "~" },
     }
   },
 
