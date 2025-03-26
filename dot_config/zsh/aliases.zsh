@@ -1,3 +1,4 @@
+alias l='ls -la'
 alias ls='lsd'
 alias ll='ls -l'
 alias la='ls -a'
