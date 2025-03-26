@@ -16,21 +16,8 @@ return {
           "ruff",
           "tinymist",
           "harper_ls",
-          "ansiblels",
         },
         handlers = {
-          ansiblels = function()
-            require("lspconfig").ansiblels.setup({
-              filetypes = { "yaml", "yaml.ansible", "ansible" },
-              settings = {
-                ansible = {
-                  python = {
-                    interpreterPath = 'python3',
-                  },
-                }
-              }
-            })
-          end,
           lua_ls = function() require("lspconfig").lua_ls.setup({}) end,
           -- Rust analyzer is disbaled here because all work is done by
           -- rustaceanvim (rustacean.lua), but even uninstalled from mason it
