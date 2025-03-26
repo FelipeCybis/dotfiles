@@ -3,6 +3,7 @@
   hosts: localhost
   roles:
     - apt
+    - zsh
     - rust
     - role: shinstaller
       vars:
@@ -10,12 +11,6 @@
         installer_url: "https://astral.sh/uv/install.sh"
         cmd_args:
           - ""
-    - role: shinstaller
-      vars:
-        tool_name: "chezmoi"
-        installer_url: "https://get.chezmoi.io"
-        cmd_args:
-          - "-b $HOME/.local/bin/"
     - role: shinstaller
       vars:
         tool_name: "brew"
