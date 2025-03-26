@@ -8,6 +8,18 @@ alias lat='la --tree'
 alias llt='ll --tree'
 alias llat='lla --tree'
 
-# Oneliners to switch remote from ssh to https and back
-alias git-https="git remote set-url origin https://github.com/$(git remote get-url origin | sed 's/https:\/\/github.com\///' | sed 's/git@github.com://')"
-alias git-ssh="  git remote set-url origin git@github.com:$(git remote get-url origin | sed 's/https:\/\/github.com\///' | sed 's/git@github.com://')"
+# Function to switch Git remote to HTTPS
+function git_https() {
+    local repo_url
+    repo_url=$(git remote get-url origin | sed 's/https:\/\/github.com\///' | sed 's/git@github.com://')
+    git remote set-url origin "https://github.com/$repo_url"
+    echo "Switched to HTTPS: $(git remote get-url origin)"
+}
+
+# Function to switch Git remote to SSH
+function git_ssh() {
+    local repo_url
+    repo_url=$(git remote get-url origin | sed 's/https:\/\/github.com\///' | sed 's/git@github.com://')
+    git remote set-url origin "git@github.com:$repo_url"
+    echo "Switched to SSH: $(git remote get-url origin)"
+}
