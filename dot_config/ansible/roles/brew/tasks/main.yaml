@@ -6,6 +6,6 @@
 
 - name: Install Homebrew apps
   ansible.builtin.shell:
-    cmd: "brew bundle --file={{ ansible_env.HOME }}/.config/brew/Brewfile"
+    cmd: "source {{ ansible_env.HOME }}/.zshrc && brew bundle --file={{ ansible_env.HOME }}/.config/brew/Brewfile"
     executable: /bin/zsh
   when: ansible_os_family == 'Darwin' or ansible_distribution == 'Ubuntu'
