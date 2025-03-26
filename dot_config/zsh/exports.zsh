@@ -3,7 +3,13 @@ export LANGUAGE=en_US.UTF-8
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Set up fzf key bindings and fuzzy completion
-eval "$(fzf --zsh)"
+source <(fzf --zsh)
+
+# Preview fzf file content using bat
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Cargo
 source "$HOME/.cargo/env"
