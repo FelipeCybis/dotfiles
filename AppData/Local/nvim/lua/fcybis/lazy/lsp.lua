@@ -234,7 +234,7 @@ return {
         version = "*",
       },
     },
-    version = 'v0.*',
+    version = 'v1.*',
 
     opts = {
       keymap = {

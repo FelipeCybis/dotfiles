@@ -1,5 +1,4 @@
 export EDITOR="nvim"
-export TERMINAL="wezterm"
 export LANGUAGE=en_US.UTF-8
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
