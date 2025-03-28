@@ -9,6 +9,7 @@ return {
     explorer = { enabled = true, replace_netrw = true },
     indent = { enabled = true },
     input = { enabled = true },
+    image = { enabled = true },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scratch = { enabled = true },
