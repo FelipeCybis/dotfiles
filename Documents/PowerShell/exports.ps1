@@ -1,9 +1,7 @@
 [System.Environment]::SetEnvironmentVariable('EDITOR','nvim')
 
-if (Get-Command wezterm -errorAction SilentlyContinue){
-    [System.Environment]::SetEnvironmentVariable('TERMINAL','wezterm')
-    [System.Environment]::SetEnvironmentVariable('TERM','wezterm')
-}
+# Add WezTerm release directory to PATH
+$env:Path += ";$HOME/work/repos/wezterm/target/release"
 
 if (Get-Command bat -errorAction SilentlyContinue)
 {
