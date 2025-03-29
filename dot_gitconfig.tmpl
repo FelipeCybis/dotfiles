@@ -9,8 +9,11 @@
     pager = delta
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-	sshcommand = ssh.exe
+	sshcommand = /mnt/c/Windows/System32/OpenSSH/ssh.exe
 {{   end }}
+{{ end }}
+{{ if eq .chezmoi.os "windows" }}
+    sshcommand = C:/Windows/System32/OpenSSH/ssh.exe
 {{ end }}
 
 [interactive]
