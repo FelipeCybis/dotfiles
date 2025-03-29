@@ -38,4 +38,5 @@ return {
 
   -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
   wsl_domains = wsl_domains,
+  mux_enable_ssh_agent = false,
 }
