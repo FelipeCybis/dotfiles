@@ -1,8 +1,5 @@
 [System.Environment]::SetEnvironmentVariable('EDITOR','nvim')
 
-# Add WezTerm release directory to PATH
-$env:Path += ";$HOME/work/repos/wezterm/target/release"
-
 if (Get-Command bat -errorAction SilentlyContinue)
 {
     if (-not (Test-Path "$(bat --config-dir)/themes"))
