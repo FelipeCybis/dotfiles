@@ -19,13 +19,3 @@ source "$HOME/.config/space/space_aliases.sh"
 plug "$HOME/.config/zsh/aliases.zsh"
 plug "$HOME/.config/zsh/exports.zsh"
 
-# if in wsl
-{{ if eq .chezmoi.os "linux" }}
-{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-USERPROFILE_WIN=$(wslpath $(cd /mnt/c && cmd.exe /c 'echo %USERPROFILE%' | tr -d '\r'))
-WEZTERM_RELEASE_PATH=${USERPROFILE_WIN}/work/repos/wezterm/target/release
-export PATH="$WEZTERM_RELEASE_PATH:$PATH"
-alias wezterm="wezterm.exe"
-{{   end }}
-{{ end }}
-
