@@ -166,9 +166,9 @@ return {
           map('n', 'gy', function() lsp.type_definition() end, { desc = "LSP: [g]oto t[y]pe def" })
           map('n', 'gd', function() lsp.definition() end, { desc = "LSP: [g]oto [d]efinition" })
           map('n', 'gs', function() lsp.signature_help() end, { desc = "LSP: [g]oto [s]ignature" })
+          map("n", "gr", "<cmd>FzfLua lsp_references<CR>", { desc = "LSP: [g]oto [r]eferences" })
 
           map("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>", { desc = "[c]ode: [a]ctions" })
-          map("n", "gr", "<cmd>FzfLua lsp_references<CR>", { desc = "LSP: [g]oto [r]eferences" })
           map("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<CR>", { desc = "[l]SP: [d]efinitions" })
           map("n", "<leader>ls", "<cmd>FzfLua lsp_document_symbols<CR>", { desc = "[l]SP [s]ymbols" })
           map("n", "<leader>lx", "<cmd>FzfLua lsp_document_diagnostics<CR>", { desc = "[l]SP diagnostic[x]" })
