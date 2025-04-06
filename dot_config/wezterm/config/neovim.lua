@@ -93,9 +93,11 @@ end
 
 wezterm.on('user-var-changed', function(window, pane, name, value)
   wezterm.log_info("User var changed", name, value)
+  -- WEZTERM_MOVE {"l", "r", "t", "b"}: Move across tabs or panes
   if name == "WEZTERM_MOVE" then
     window:perform_action(move_across_tabs_compat(window, pane, value), pane)
   end
+
   local overrides = window:get_config_overrides() or {}
   if name == "ZEN_MODE" then
     local incremental = value:find("+")
