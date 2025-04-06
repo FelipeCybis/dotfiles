@@ -12,25 +12,14 @@ return {
     -- General function to move and check in any direction
     local function move(direction, wez_direction)
       local current_nvim_win = vim.api.nvim_get_current_win()
-      local current_wezterm_pane_id = wezterm.get_current_pane()
       vim.cmd('wincmd ' .. direction)
       local new_nvim_win = vim.api.nvim_get_current_win()
 
       -- if nvim window did not change, try wezterm pane
       if current_nvim_win == new_nvim_win then
-        -- check if there is a new pane to given direction
-        local next_pane_id = wezterm.get_pane_direction(wez_direction, current_wezterm_pane_id)
-        -- if no pane and direction is 'h' or 'l', try tabs
-        if next_pane_id == nil and (direction == "h" or direction == "l") then
-          local rel_tab = 1
-          if direction == "h" then
-            rel_tab = -1
-          end
-          wezterm.switch_tab.relative(rel_tab)
-        else
-          -- there was a new pane, go to this pane
-          wezterm.switch_pane.direction(wez_direction, current_wezterm_pane_id)
-        end
+        -- wezterm nvim plugin does not handles things well when not on local (ssh, etc))
+        -- we handle things on wezterm config
+        wezterm.set_user_var("WEZTERM_MOVE", direction)
       end
     end
 
