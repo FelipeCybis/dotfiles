@@ -26,6 +26,13 @@ return {
       username = "Felipe",
       multiplexing = "None",
       default_prog = { "wsl.exe", "-d", "ubuntu-22.04", "--cd", "~" },
+    },
+    {
+      name = "labo_zellij",
+      remote_address = "physmed",
+      username = "Felipe",
+      multiplexing = "None",
+      default_prog = { "wsl.exe", "-d", "ubuntu-22.04", "--cd", "~", "--", "zellij", "--layout", "welcome" },
     }
   },
 
