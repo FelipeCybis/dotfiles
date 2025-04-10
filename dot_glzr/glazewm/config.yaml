@@ -33,10 +33,10 @@ gaps:
 
   # Gap between windows and the screen edge.
   outer_gap:
-    top: '10px'
-    right: '10px'
-    bottom: '10px'
-    left: '10px'
+    top: '25px'
+    right: '25px'
+    bottom: '25px'
+    left: '25px'
 
 window_effects:
   # Visual effects to apply to the focused window.
@@ -57,7 +57,7 @@ window_effects:
     corner_style:
       enabled: true
       # Allowed values: 'square', 'rounded', 'small_rounded'.
-      style: 'square'
+      style: 'small_rounded'
 
   # Visual effects to apply to non-focused windows.
   other_windows:
@@ -68,7 +68,7 @@ window_effects:
       enabled: false
     corner_style:
       enabled: true
-      style: 'square'
+      style: 'small_rounded'
 
 window_behavior:
   # New windows are created in this state whenever possible.
