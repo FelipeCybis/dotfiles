@@ -18,10 +18,27 @@ return {
     end
 
     require("typst-preview").setup({
-      debug = true,
+      debug = false,
       dependencies_bin = {
         ["tinymist"] = tinymist_bin,
-      }
+      },
+      get_main_file = function(path)
+        -- I set this when pinning the typst main file
+        -- if not, do what is the default
+        if vim.g.typst_main_file then
+          return vim.g.typst_main_file
+        end
+        return path
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "typst",
+      callback = function()
+        vim.schedule(function()
+          vim.keymap.set("n", "<leader>ut", "<CMD>TypstPreviewToggle<CR>", { desc = "Toggle Typst Preview", buffer = 0 })
+        end)
+      end
     })
   end,
 }

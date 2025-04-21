@@ -115,7 +115,7 @@ return {
 
               local client = vim.lsp.get_client_by_id(tinymist_id)
               if client then
-                client.request("workspace/executeCommand", {
+                client:request("workspace/executeCommand", {
                   command = "tinymist.pinMain",
                   arguments = { vim.api.nvim_buf_get_name(0) },
                 }, function(err)
@@ -123,6 +123,7 @@ return {
                     vim.notify("Error pinning: " .. err, vim.log.levels.ERROR)
                   else
                     vim.notify("Succesfully pinned!", vim.log.levels.INFO)
+                    vim.g.typst_main_file = vim.api.nvim_buf_get_name(0)
                   end
                 end, 0)
               end
@@ -180,7 +181,13 @@ return {
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
           end, { desc = "[l]SP: [i]nlay hints" })
 
-          if client.supports_method("textDocument/formatting") then
+          if client.name == "tinymist" then
+            -- Tinymist specific mappings
+            map("n", "<leader>lp", "<cmd>TinymistpinMain<CR>",
+              { desc = "[l]SP: [p]in main file" })
+          end
+
+          if client:supports_method("textDocument/formatting") then
             -- Format on save
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = bufnr,

@@ -1,6 +1,7 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        // bind "a" { WriteChars "\033]1337;SetUserVar=%s=%s\007test"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
