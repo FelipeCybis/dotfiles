@@ -19,6 +19,7 @@ return {
 
     require("typst-preview").setup({
       debug = false,
+      -- invert_colors = "always",
       dependencies_bin = {
         ["tinymist"] = tinymist_bin,
       },
