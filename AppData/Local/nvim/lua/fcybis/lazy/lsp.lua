@@ -2,8 +2,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "williamboman/mason.nvim",           version = "1.*" },
+      { "williamboman/mason-lspconfig.nvim", version = "1.*" },
       "j-hui/fidget.nvim",
     },
     config = function()
@@ -94,40 +94,58 @@ return {
               settings = {
                 formatterMode = "typstyle",
                 preview = {
-                  pinPreviewFile = false,
+                  background = {
+                    enabled = true,
+                  }
                 }
               },
+              on_attach = function(client, bufnr)
+                vim.keymap.set("n", "<leader>lp", function()
+                  client:exec_cmd({
+                    title = "pin",
+                    command = "tinymist.pinMain",
+                    arguments = { vim.api.nvim_buf_get_name(0) },
+                  }, { bufnr = bufnr }, function(err)
+                    if err then
+                      vim.notify("Error pinning: " .. err, vim.log.levels.ERROR)
+                    else
+                      vim.notify("Succesfully pinned!", vim.log.levels.INFO)
+                      vim.g.typst_main_file = vim.api.nvim_buf_get_name(0)
+                    end
+                  end)
+                end, { desc = "[l]SP: [p]in main file", noremap = true })
+              end,
             })
             -- create a nvim command to execute a lsp buf command
-            vim.api.nvim_create_user_command("TinymistpinMain", function()
-              local tinymist_id = nil
-              for _, client in pairs(vim.lsp.get_clients()) do
-                if client.name == "tinymist" then
-                  tinymist_id = client.id
-                  break
-                end
-              end
-
-              if not tinymist_id then
-                vim.notify("Tinymist not running!", vim.log.levels.ERROR)
-                return
-              end
-
-              local client = vim.lsp.get_client_by_id(tinymist_id)
-              if client then
-                client:request("workspace/executeCommand", {
-                  command = "tinymist.pinMain",
-                  arguments = { vim.api.nvim_buf_get_name(0) },
-                }, function(err)
-                  if err then
-                    vim.notify("Error pinning: " .. err, vim.log.levels.ERROR)
-                  else
-                    vim.notify("Succesfully pinned!", vim.log.levels.INFO)
-                    vim.g.typst_main_file = vim.api.nvim_buf_get_name(0)
-                  end
-                end, 0)
-              end
-            end, {})
+            -- vim.api.nvim_create_user_command("TinymistpinMain", function()
+            --   local tinymist_id = nil
+            --   for _, client in pairs(vim.lsp.get_clients()) do
+            --     if client.name == "tinymist" then
+            --       tinymist_id = client.id
+            --       break
+            --     end
+            --   end
+            --
+            --   if not tinymist_id then
+            --     vim.notify("Tinymist not running!", vim.log.levels.ERROR)
+            --     return
+            --   end
+            --
+            --   local client = vim.lsp.get_client_by_id(tinymist_id)
+            --   if client then
+            --     client:request("workspace/executeCommand", {
+            --       command = "tinymist.pinMain",
+            --       arguments = { vim.api.nvim_buf_get_name(0) },
+            --     }, function(err)
+            --       if err then
+            --         vim.notify("Error pinning: " .. err, vim.log.levels.ERROR)
+            --       else
+            --         vim.notify("Succesfully pinned!", vim.log.levels.INFO)
+            --         vim.g.typst_main_file = vim.api.nvim_buf_get_name(0)
+            --       end
+            --     end, 0)
+            --   end
+            -- end, {})
           end,
           harper_ls = function()
             require("lspconfig").harper_ls.setup({
@@ -180,12 +198,6 @@ return {
           map("n", "<leader>li", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
           end, { desc = "[l]SP: [i]nlay hints" })
-
-          if client.name == "tinymist" then
-            -- Tinymist specific mappings
-            map("n", "<leader>lp", "<cmd>TinymistpinMain<CR>",
-              { desc = "[l]SP: [p]in main file" })
-          end
 
           if client:supports_method("textDocument/formatting") then
             -- Format on save
@@ -277,8 +289,7 @@ return {
           }
         },
         documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 200,
+          auto_show = false,
         },
       }
     },
