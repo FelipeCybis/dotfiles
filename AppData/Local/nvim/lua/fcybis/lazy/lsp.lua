@@ -12,6 +12,8 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "basedpyright",
+          "pylsp",
+          "ty",
           "lua_ls",
           "ruff",
           "tinymist",

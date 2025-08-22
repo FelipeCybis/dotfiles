@@ -1,6 +1,6 @@
-vim.lsp.enable({ "lua_ls", "basedpyright", "pylsp", "ruff", "harper_ls", "tinymist" })
+vim.lsp.enable({ "lua_ls", "ty", "ruff", "harper_ls", "tinymist" })
 
-vim.lsp.config("harper_ls", { filetypes = { "typst", "markdown", "gitcommit", "lua" } })
+vim.lsp.config("harper_ls", { filetypes = { "typst", "markdown", "gitcommit" } })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = 'LSP actions on attach',

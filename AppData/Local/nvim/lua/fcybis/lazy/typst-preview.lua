@@ -7,8 +7,9 @@ return {
   end,
   config = function()
     local tinymist_bin = vim.fn.expand("$MASON/bin/tinymist")
-    -- if vim.fn.has('win32') == 1 then
-    --   tinymist_bin = tinymist_bin .. "/tinymist-win32-x64.exe"
+    if vim.fn.has('win32') == 1 then
+      tinymist_bin = tinymist_bin .. ".cmd"
+    end
     -- elseif vim.loop.os_uname().sysname == "Linux" then
     --   tinymist_bin = tinymist_bin .. "/tinymist-linux-x64"
     -- else
