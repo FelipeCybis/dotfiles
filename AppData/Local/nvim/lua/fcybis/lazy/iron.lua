@@ -18,6 +18,7 @@ return {
                 return { "zsh" }
               end
             end,
+            format = require("iron.fts.common").bracketed_paste_python,
           },
           python = {
             command = python_command,
