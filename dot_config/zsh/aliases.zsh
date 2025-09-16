@@ -23,3 +23,6 @@ function git_ssh() {
     git remote set-url origin "git@github.com:$repo_url"
     echo "Switched to SSH: $(git remote get-url origin)"
 }
+
+# Define an alias 'venv' to activate the virtual environment
+alias venv='source .venv/bin/activate'
