@@ -26,7 +26,7 @@ return {
             block_deviders = { "# %%", "#%%" },
           },
         },
-        repl_open_cmd = require("iron.view").split.rightbelow("40%"),
+        repl_open_cmd = require("iron.view").split.vertical.rightbelow("40%"),
       },
 
       keymaps = {
