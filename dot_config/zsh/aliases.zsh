@@ -26,3 +26,7 @@ function git_ssh() {
 
 # Define an alias 'venv' to activate the virtual environment
 alias venv='source .venv/bin/activate'
+
+# Alias to open files with the default application (more like macOS)
+alias open='xdg-open'
+
