@@ -1,27 +1,20 @@
 return {
   {
-    "neovim/nvim-lspconfig",
+    "j-hui/fidget.nvim",
     dependencies = {
-      { "mason-org/mason.nvim", },
-      { "mason-org/mason-lspconfig.nvim", },
-      "j-hui/fidget.nvim",
+      { "mason-org/mason.nvim", opts = { log_level = vim.log.levels.DEBUG } },
+      {
+        "mason-org/mason-lspconfig.nvim",
+        opts = {
+          ensure_installed = {
+            "lua_ls",
+            "tinymist",
+            "harper_ls",
+          },
+          automatic_enable = false,
+        }
+      },
     },
-    config = function()
-      require("fidget").setup({})
-      require("mason").setup({ log_level = vim.log.levels.DEBUG })
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "basedpyright",
-          "pylsp",
-          "ty",
-          "lua_ls",
-          "ruff",
-          "tinymist",
-          "harper_ls",
-        },
-        automatic_enable = false,
-      })
-    end,
   },
   {
     "folke/lazydev.nvim",

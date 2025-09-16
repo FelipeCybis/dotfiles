@@ -1,4 +1,14 @@
 return {
+  cmd = { "uvx", "--with", "pylsp-mypy", "--with", "mypy==1.16", "--from", "python-lsp-server", "pylsp" },
+  filetypes = { "python" },
+  root_markers = {
+    'pyproject.toml',
+    'setup.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    '.git',
+  },
   settings = {
     pylsp = {
       plugins = {
