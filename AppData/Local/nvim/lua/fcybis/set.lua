@@ -63,5 +63,3 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
-
-vim.lsp.set_log_level("off")

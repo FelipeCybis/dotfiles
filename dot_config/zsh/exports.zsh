@@ -20,6 +20,9 @@ export NVM_DIR="$HOME/.config/nvm"
 
 # uv completions
 eval "$(uv generate-shell-completion zsh)"
+#
+# just completions
+eval "$(just --completions zsh)"
 
 eval "$(zoxide init zsh)"
 

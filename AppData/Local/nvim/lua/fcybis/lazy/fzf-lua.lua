@@ -79,7 +79,7 @@ return {
       { "<leader>gb", fzf.git_bcommits,     desc = "[g]it: commits ([b]uffer)" },
       { "<leader>gc", fzf.git_commits,      desc = "[g]it: [c]ommits (project)" },
       { "<leader>gB", fzf.git_branches,     desc = "[g]it: [B]ranches" },
-      { "<leader>gh", fzf.git_stash,        desc = "[g]it: stas[h]" },
+      { "<leader>gS", fzf.git_stash,        desc = "[g]it: [S]tash" },
       { "<leader>gs", fzf.git_status,       desc = "[g]it: [s]tatus" },
       { "<leader>gt", fzf.git_tags,         desc = "[g]it: [t]ags" },
     }

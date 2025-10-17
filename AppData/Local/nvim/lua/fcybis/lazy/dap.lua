@@ -4,7 +4,7 @@ return {
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "nvim-neotest/nvim-nio",
-      "mfussenegger/nvim-dap-python"
+      -- "mfussenegger/nvim-dap-python"
     },
 
     keys = {
@@ -16,16 +16,16 @@ return {
     },
     config = function()
       -- Python dap setup
-      require("dap-python").setup("uv")
-      require("dap-python").test_runner = "pytest"
-      table.insert(require('dap').configurations.python, {
-        type = 'python',
-        request = 'launch',
-        name = 'External code debugging',
-        program = '${file}',
-        justMyCode = false,
-        -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
-      })
+      -- require("dap-python").setup("uv")
+      -- require("dap-python").test_runner = "pytest"
+      -- table.insert(require('dap').configurations.python, {
+      --   type = 'python',
+      --   request = 'launch',
+      --   name = 'External code debugging',
+      --   program = '${file}',
+      --   justMyCode = false,
+      --   -- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+      -- })
 
       -- Signs
       for _, group in pairs({

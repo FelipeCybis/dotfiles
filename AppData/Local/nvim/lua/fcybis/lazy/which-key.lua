@@ -13,7 +13,7 @@ return {
         { "<leader>e", group = "[e]xplorer", icon = { icon = " ", color = "yellow" } },
         { "<leader>f", group = "[f]ind", icon = { icon = "󰮗 ", color = "yellow" } },
         { "<leader>g", group = "[g]it", icon = { icon = " ", color = "red" } },
-        { "<leader>gh", group = "hunks" },
+        { "<leader>gh", group = "[g]it[h]ub" },
         { "<leader>i", group = "[i]iron", icon = { icon = " ", color = "yellow" } },
         { "<leader>l", group = "[l]sp", icon = { icon = "😛 ", color = "orange" } },
         { "<leader>q", group = "quit/session" },

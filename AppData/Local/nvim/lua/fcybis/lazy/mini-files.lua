@@ -19,6 +19,24 @@ return {
         vim.keymap.set('n', 'gt', files_set_cwd, { buffer = args.data.buf_id, desc = 'Set cwd to current file' })
       end,
     })
+
+    -- Function to yank (copy) the full path of the entry under the cursor
+    local yank_full_path = function()
+      local path = (MiniFiles.get_fs_entry() or {}).path
+      if path == nil then
+        return vim.notify('Cursor is not on valid entry')
+      end
+      vim.fn.setreg(vim.v.register, path)
+    end
+
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'MiniFilesBufferCreate',
+      callback = function(args)
+        local buf_id = args.data.buf_id
+        -- Set 'gy' to yank the path under cursor
+        vim.keymap.set('n', 'gy', yank_full_path, { buffer = buf_id, desc = 'Yank full path' })
+      end,
+    })
   end,
   keys = {
     {

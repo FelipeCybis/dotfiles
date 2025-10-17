@@ -1,6 +1,8 @@
+---@type vim.lsp.Config
 return {
   cmd = { "uvx", "ruff", "server" },
   filetypes = { "python" },
+  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
   on_attach = function(client, bufnr)
     -- Disable hover in favor of Pyright
     client.server_capabilities.hoverProvider = false
@@ -16,5 +18,8 @@ return {
         vim.wait(100)
       end,
     })
-  end
+  end,
+  on_exit = function(code, signal, client_id)
+    vim.print("Ruff LSP exited with code " .. code .. " and signal " .. signal)
+  end,
 }

@@ -2,6 +2,8 @@ vim.lsp.enable({ "lua_ls", "pyrefly", "ruff", "harper_ls", "tinymist" })
 
 vim.lsp.config("harper_ls", { filetypes = { "typst", "markdown", "gitcommit" } })
 
+vim.lsp.set_log_level("off")
+
 vim.api.nvim_create_autocmd("LspAttach", {
   desc = 'LSP actions on attach',
   callback = function(args)
@@ -9,6 +11,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client then return end
+
+    -- vim.print("LSP " .. client.name .. " attached to buffer " .. bufnr)
 
     local map = function(mode, lhs, rhs, opts)
       if type(opts) == "string" then
@@ -43,6 +47,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.api.nvim_create_autocmd("BufWritePre", {
         buffer = args.buf,
         callback = function()
+          -- vim.print("Formatting with " .. client.name .. " ID: " .. client.id)
           vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
         end,
       })
