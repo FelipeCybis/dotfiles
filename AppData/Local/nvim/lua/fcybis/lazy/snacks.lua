@@ -44,6 +44,7 @@ return {
       { '<leader>fl', function() Snacks.picker.lazy() end,             desc = '[f]ind: [l]azy cfg files' },
       { '<leader>fP', function() Snacks.picker.projects() end,         desc = '[f]ind: [P]rojects' },
       { '<leader>fr', function() Snacks.picker.recent() end,           desc = '[f]ind: [r]ecent' },
+      { '<leader>fu', function() Snacks.picker.undo() end,             desc = '[f]ind: [u]ndo tree' },
       { '<leader>si', function() Snacks.picker.icons() end,            desc = '[s]earch: [i]cons' },
       { '<leader>ss', function() Snacks.scratch.select() end,          desc = '[s]earch: [s]cratch Buffer' },
       { '<leader>sn', function() Snacks.notifier.show_history() end,   desc = '[s]earch: [n]otifier history' },
