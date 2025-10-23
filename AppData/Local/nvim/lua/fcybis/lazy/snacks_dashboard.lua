@@ -12,7 +12,7 @@ return {
           { icon = ' ', key = 'r', desc = 'Recent Files', action = ':lua Snacks.dashboard.pick("oldfiles ")' },
           { icon = ' ', key = 'c', desc = 'Dotfiles', action = ':lua Fzf_Chezmoi()' },
           { icon = ' ', key = 's', desc = 'Restore Session', section = 'session' },
-          { icon = '󰒲 ', key = 'L', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
+          { icon = '󰒲 ', key = 'l', desc = 'Lazy', action = ':Lazy', enabled = package.loaded.lazy ~= nil },
           { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
         },
         header = [[
