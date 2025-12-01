@@ -3,7 +3,6 @@ return {
 
   config = function()
     local iron = require("iron.core")
-    local python_command = vim.fn.executable('ipython') == 1 and { "ipython", "--no-autoindent" } or { "python" }
 
     iron.setup {
       config = {
@@ -21,7 +20,7 @@ return {
             format = require("iron.fts.common").bracketed_paste_python,
           },
           python = {
-            command = python_command,
+            command = { "uv", "run", "--with", "ipython", "ipython", "--no-autoindent" },
             format = require("iron.fts.common").bracketed_paste_python,
             block_deviders = { "# %%", "#%%" },
           },
