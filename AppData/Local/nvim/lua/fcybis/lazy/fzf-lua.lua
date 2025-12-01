@@ -56,9 +56,9 @@ return {
 
     return {
       -- find
-      { "<leader>fb", fzf.buffers,          desc = "[f]ind: [b]uffers" },
+      -- { "<leader>fb", fzf.buffers,          desc = "[f]ind: [b]uffers" },
       { "<leader>fd", fzf_files_local,      desc = "[f]ind: files from current [d]irectory" },
-      { "<leader>ff", fzf.files,            desc = "[f]ind: [f]iles" },
+      -- { "<leader>ff", fzf.files,            desc = "[f]ind: [f]iles" },
       { "<leader>fo", fzf.oldfiles,         desc = "[f]ind: [o]ld files" },
       { "<leader>fp", fzf.complete_file,    desc = "[f]ind: complete file [p]ath" },
       { "<leader>fq", fzf.quickfix,         desc = "[f]ind: [q]uickfix" },

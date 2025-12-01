@@ -45,6 +45,8 @@ return {
       { '<leader>ts', function() Snacks.terminal() end,                         desc = '[t]erminal: [s]plit' },
       { ']n',         function() Snacks.words.jump(vim.v.count1) end,           desc = 'Next Reference (snacks)' },
       { '[n',         function() Snacks.words.jump(-vim.v.count1) end,          desc = 'Prev Reference (snacks)' },
+      { '<leader>fb', function() Snacks.picker.buffers() end,                   desc = '[f]ind: [b]uffers' },
+      { '<leader>ff', function() Snacks.picker.files() end,                     desc = '[f]ind: [b]uffers' },
       { '<leader>fl', function() Snacks.picker.lazy() end,                      desc = '[f]ind: [l]azy cfg files' },
       { '<leader>fP', function() Snacks.picker.projects() end,                  desc = '[f]ind: [P]rojects' },
       { '<leader>fr', function() Snacks.picker.recent() end,                    desc = '[f]ind: [r]ecent' },
