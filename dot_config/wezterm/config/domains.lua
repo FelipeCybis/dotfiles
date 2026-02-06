@@ -14,6 +14,7 @@ end
 return {
   -- ref: https://wezfurlong.org/wezterm/config/lua/SshDomain.html
   ssh_domains = {
+    { name = "ubuntu", remote_address = "127.0.0.1", username = "fpereir", multiplexing = "None" },
     {
       name = "labo",
       remote_address = "physmed",
@@ -25,14 +26,14 @@ return {
       remote_address = "physmed",
       username = "Felipe",
       multiplexing = "None",
-      default_prog = { "wsl.exe", "-d", "ubuntu-22.04", "--cd", "~" },
+      default_prog = { "wsl.exe", "-d", "Ubuntu-24.04", "--cd", "~" },
     },
     {
       name = "labo_zellij",
       remote_address = "physmed",
       username = "Felipe",
       multiplexing = "None",
-      default_prog = { "wsl.exe", "-d", "ubuntu-22.04", "--cd", "~", "--", "zellij", "--layout", "welcome" },
+      default_prog = { "wsl.exe", "-d", "Ubuntu-24.04", "--cd", "~", "--", "zellij", "--layout", "welcome" },
     }
   },
 
