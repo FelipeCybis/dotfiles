@@ -2,13 +2,13 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # Enable vim mode in zsh
 bindkey -v
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-# Created by Zap installer
-[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
-plug "zsh-users/zsh-autosuggestions"
-plug "zap-zsh/supercharge"
-plug "zsh-users/zsh-syntax-highlighting"
-plug "chivalryq/git-alias"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 {{ if ne .chezmoi.os "darwin" }}
 # everything installed with brew should come after this
@@ -16,6 +16,42 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source "$HOME/.config/space/space_aliases.sh"
 {{ end }}
 
-plug "$HOME/.config/zsh/aliases.zsh"
-plug "$HOME/.config/zsh/exports.zsh"
+zinit light zsh-users/zsh-completions
+zinit snippet $HOME/.config/zsh/exports.zsh
+zinit snippet $HOME/.config/zsh/completions.zsh
+zinit snippet $HOME/.config/zsh/aliases.zsh
 
+# Load completions
+autoload -U compinit && compinit
+zinit cdreplay -q
+
+
+zinit ice wait
+zinit light Aloxaf/fzf-tab
+zinit ice wait
+zinit light zsh-users/zsh-autosuggestions
+zinit ice wait
+zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait
+zinit light chivalryq/git-alias
+
+# Completion styling
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+
+
+
+# History
+HISTSIZE=10000
+HISTFILE="$HOME/.zsh_history"
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+zinit snippet $HOME/.config/zsh/evals.zsh
