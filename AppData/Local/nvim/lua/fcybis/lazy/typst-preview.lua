@@ -10,6 +10,8 @@ return {
     if vim.fn.has('win32') == 1 then
       tinymist_bin = tinymist_bin .. ".cmd"
     end
+    vim.g.typst_tinymist_bin = tinymist_bin
+
     -- elseif vim.loop.os_uname().sysname == "Linux" then
     --   tinymist_bin = tinymist_bin .. "/tinymist-linux-x64"
     -- else

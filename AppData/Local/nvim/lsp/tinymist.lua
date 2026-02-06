@@ -1,11 +1,8 @@
+---@type vim.lsp.Config
 return {
-  single_file_support = true,
+  cmd = { "tinymist" },
+  filetypes = { "typst" },
   settings = {
     formatterMode = "typstyle",
-    preview = {
-      background = {
-        enabled = true,
-      }
-    }
   },
 }
