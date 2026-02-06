@@ -275,6 +275,8 @@ theme "catppuccin-frappe"
 // Default: normal
 // 
 default_mode "normal"
+
+web_server true
  
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
