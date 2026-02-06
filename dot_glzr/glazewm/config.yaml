@@ -128,7 +128,7 @@ window_rules:
 
       - window_process: { equals: 'msrdc' }
         # window_title: { regex: 'Figure*' }
-        #
+
       - window_title: { equals: 'Arc extension popup' }
 
 binding_modes:
