@@ -6,6 +6,7 @@ return {
       {
         mode = { "n", "v" },
         { "<leader><tab>", group = "tabs" },
+        { "<leader>a", group = "[a]i sidekick", icon = { icon = "", color = "green" } },
         { "<leader>b", group = "[b]uffer", icon = { icon = "󰃧 ", color = "cyan" } },
         { "<leader>c", group = "[c]ode", icon = { icon = " ", color = "cyan" } },
         { "<leader>d", group = "[d]ebug", icon = { icon = " ", color = "cyan" } },
@@ -13,6 +14,7 @@ return {
         { "<leader>e", group = "[e]xplorer", icon = { icon = " ", color = "yellow" } },
         { "<leader>f", group = "[f]ind", icon = { icon = "󰮗 ", color = "yellow" } },
         { "<leader>g", group = "[g]it", icon = { icon = " ", color = "red" } },
+        { "<leader>gc", group = "[g]it [c]ommit", icon = { icon = " ", color = "red" } },
         { "<leader>gh", group = "[g]it[h]ub" },
         { "<leader>i", group = "[i]iron", icon = { icon = " ", color = "yellow" } },
         { "<leader>l", group = "[l]sp", icon = { icon = "😛 ", color = "orange" } },
@@ -27,6 +29,11 @@ return {
         { "]", group = "next" },
         { "g", group = "[g]oto" },
         { "gs", group = "[s]urround" },
+        { "gr", group = "[r]rr lsp" },
+        { "gri", desc = "LSP: [i]mplementations" },
+        { "gra", desc = "LSP: code [a]ction" },
+        { "grn", desc = "LSP: [r]ename" },
+        { "grt", desc = "LSP: [t]ype definition" },
         { "z", group = "fold" },
       },
     }
@@ -35,7 +42,7 @@ return {
     {
       "<leader>?",
       function()
-        require("which-key").show({ global = false })
+        require("which-key").show({ global = true })
       end,
       desc = "Buffer Local Keymaps (which-key)",
     },

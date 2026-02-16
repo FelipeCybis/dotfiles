@@ -9,8 +9,8 @@ map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Move around buffer
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll half page down and center", buffer = true })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll half page up and center", buffer = true })
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 

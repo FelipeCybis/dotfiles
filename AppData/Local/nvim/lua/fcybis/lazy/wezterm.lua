@@ -49,15 +49,15 @@ return {
     -- Key mappings for all directions
     vim.keymap.set('n', '<A-h>', function()
       move('h', 'Left')
-    end, { noremap = true, silent = true })
+    end, { noremap = true, silent = true, desc = "Move to left (Wezterm compatible)" })
     vim.keymap.set('n', '<A-l>', function()
       move('l', 'Right')
-    end, { noremap = true, silent = true })
+    end, { noremap = true, silent = true, desc = "Move to right (Wezterm compatible)" })
     vim.keymap.set('n', '<A-k>', function()
       move('k', 'Up')
-    end, { noremap = true, silent = true })
+    end, { noremap = true, silent = true, desc = "Move to up (Wezterm compatible)" })
     vim.keymap.set('n', '<A-j>', function()
       move('j', 'Down')
-    end, { noremap = true, silent = true })
+    end, { noremap = true, silent = true, desc = "Move to down (Wezterm compatible)" })
   end,
 }

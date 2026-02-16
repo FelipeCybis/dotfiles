@@ -24,15 +24,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set(mode, lhs, rhs, opts)
     end
 
-    map('n', 'gy', function() lsp.type_definition() end, "LSP: [g]oto t[y]pe def")
+    -- Define goto definition twice for now
     map('n', 'gd', function() lsp.definition() end, "LSP: [g]oto [d]efinition")
-    map('n', 'gs', function() lsp.signature_help() end, "LSP: [g]oto [s]ignature")
-    map("n", "gr", "<cmd>FzfLua lsp_references<CR>", "LSP: [g]oto [r]eferences")
-
-    map("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>", "[c]ode: [a]ctions")
-    map("n", "<leader>ld", "<cmd>FzfLua lsp_definitions<CR>", "[l]SP: [d]efinitions")
-    map("n", "<leader>ls", "<cmd>FzfLua lsp_document_symbols<CR>", "[l]SP [s]ymbols")
-    map("n", "<leader>lx", "<cmd>FzfLua lsp_document_diagnostics<CR>", "[l]SP diagnostic[x]")
+    map('n', 'grd', function() lsp.definition() end, "LSP: [g]oto [d]efinition")
+    map('n', 'grD', function() lsp.declaration() end, "LSP: [g]oto [D]eclaration")
+    map('n', '<C-S>', function() lsp.signature_help() end, "LSP: signature help")
+    map("n", "gO", "<cmd>FzfLua lsp_document_symbols<CR>", "LSP: [g]oto symb[O]ls")
 
     -- Other mappings to be used by any LSP
     map("n", "<leader>lf", function() lsp.format({ async = true }) end, "[l]SP: [f]ormat buffer")
