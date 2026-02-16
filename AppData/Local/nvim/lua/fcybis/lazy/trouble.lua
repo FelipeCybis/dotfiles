@@ -9,13 +9,24 @@ return {
     local trouble = require("trouble")
     local move_and_jump = function(trouble_fun)
       return function()
-        local opts = { mode = trouble.last_mode or "symbols", focus = false }
+        if not trouble.last_mode then
+          return
+        end
+        local opts = { mode = trouble.last_mode, focus = false, jump = true }
         trouble_fun(opts)
-        ---@diagnostic disable-next-line
-        trouble.jump()
       end
     end
     return {
+      {
+        "<leader>cq",
+        function()
+          if trouble.last_mode then
+            ---@diagnostic disable-next-line
+            trouble.close({ mode = trouble.last_mode })
+          end
+        end,
+        desc = "[c]ode: [q]uit last Trouble view",
+      },
       {
         "<leader>cx",
         "<cmd>Trouble diagnostics toggle<cr>",
@@ -28,8 +39,7 @@ return {
       },
       {
         "<leader>cs",
-        ---@diagnostic disable-next-line
-        function() trouble.toggle({ mode = "symbols", focus = false }) end,
+        "<cmd>Trouble symbols toggle<cr>",
         desc = "[c]ode: Trouble [s]ymbols",
       },
       {
@@ -38,19 +48,9 @@ return {
         desc = "Next Trouble item",
       },
       {
-        "]g",
-        move_and_jump(trouble.last),
-        desc = "[g]oto: last Trouble item",
-      },
-      {
         "<C-[>",
         move_and_jump(trouble.prev),
         desc = "Previous Trouble item",
-      },
-      {
-        "[g",
-        move_and_jump(trouble.first),
-        desc = "[g]oto: first Trouble item",
       },
       {
         "<leader>cl",
