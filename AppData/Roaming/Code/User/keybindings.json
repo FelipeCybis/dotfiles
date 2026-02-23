@@ -1,0 +1,84 @@
+[
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.addSelectionToNextFindMatch"
+    },
+    // NAVIGATION
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.toggleZenMode"
+    },
+    {
+        "key": "ctrl+shift+j",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+shift+j",
+        "command": "workbench.action.togglePanel"
+    },
+
+    {
+        "key": "ctrl+shift+n",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+w",
+        "command": "workbench.action.terminal.kill",
+        "when": "terminalFocus"
+    },
+    // {
+    //   "key": "ctrl+o",
+    //   "command": "projectManager.listGitProjects#sideBarGit"
+    // },
+    // VIM-related
+    {
+        "key": "shift+;",
+        "command": "vim.showQuickpickCmdLine",
+        "when": "inZenMode && vim.mode != 'Insert' && editorTextFocus"
+    },
+    // File Tree
+    {
+        "key": "ctrl+e",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+alt+v",
+        "command": "toggleVim"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "workbench.files.action.focusFilesExplorer",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.view.testing.focus",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "n",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "shift+n",
+        "command": "explorer.newFolder",
+        "when": "explorerViewletFocus"
+    },
+    {
+        "key": "c",
+        "command": "filesExplorer.copy",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "p",
+        "command": "filesExplorer.paste",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "r",
+        "command": "renameFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    }
+]

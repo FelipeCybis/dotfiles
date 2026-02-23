@@ -1,0 +1,216 @@
+{
+    // VSCode editor and terminal
+    "workbench.startupEditor": "none",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Catppuccin Frappé",
+    "workbench.panel.defaultLocation": "bottom",
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideStatusBar": false,
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "editor.fontSize": 16,
+    "editor.fontFamily": "MesloLGS NF",
+    "editor.wordWrapColumn": 88,
+    "editor.wordWrap": "bounded",
+    "editor.renderWhitespace": "all",
+    "editor.stickyScroll.enabled": true,
+    "editor.inlineSuggest.enabled": true,
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.fontSize": 16,
+    "window.zoomLevel": 1,
+    // Rewrap extension
+    "rewrap.autoWrap.enabled": true,
+    "rewrap.wrappingColumn": 88,
+    "rewrap.wholeComment": false,
+    // VIM configuration
+    "vim.leader": " ",
+    "vim.useSystemClipboard": true,
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.color": "rgba(230, 97, 89, 0.7)",
+    "vim.highlightedyank.textColor": "white",
+    "vim.highlightedyank.duration": 2000,
+    "vim.hlsearch": true,
+    "vim.sneak": true,
+    "vim.normalModeKeyBindings": [
+        { "before": ["leader", "w"], "commands": [":w!"] },
+        { "before": ["leader", "q"], "commands": [":q!"] },
+        { "before": ["leader", "x"], "commands": [":x!"] },
+        {
+            "before": ["K"],
+            "commands": ["editor.action.showHover"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        { "before": ["leader", "a"], "after": ["g", "g", "V", "G"] },
+        // Search for the word cursor is in
+        {
+            "before": ["leader", "/"],
+            "after": ["v", "i", "w", "y", "/", "<C-r>", "\""]
+        },
+        // Edit word cursor is in and possibly more appearances
+        {
+            "before": ["leader", "z"],
+            "after": ["v", "i", "w", "y", ":", "s", "/", "<C-r>", "\"", "/"]
+        },
+        {
+            "before": ["leader", "5"],
+            "after": [
+                "v",
+                "i",
+                "w",
+                "y",
+                ":",
+                "%",
+                "s",
+                "/",
+                "<C-r>",
+                "\"",
+                "/"
+            ]
+        },
+        // Navigation
+        {
+            "before": ["<S-h>"],
+            "commands": [":bprevious"]
+        },
+        {
+            "before": ["<S-l>"],
+            "commands": [":bnext"]
+        },
+        // splits
+        {
+            "before": ["leader", "v"],
+            "commands": [":vsplit"]
+        },
+        {
+            "before": ["leader", "s"],
+            "commands": [":split"]
+        },
+        // panes
+        {
+            "before": ["leader", "h"],
+            "commands": ["workbench.action.focusLeftGroup"]
+        },
+        {
+            "before": ["leader", "k"],
+            "commands": ["workbench.action.focusAboveGroup"]
+        },
+        {
+            "before": ["leader", "j"],
+            "commands": ["workbench.action.focusBelowGroup"]
+        },
+        {
+            "before": ["leader", "l"],
+            "commands": ["workbench.action.focusRightGroup"]
+        },
+        {
+            "before": ["leader", "f"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["leader", "p"],
+            "commands": ["editor.action.formatDocument"]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        { "before": ["v"], "after": ["i", "w"] },
+        // repeateadly indent lines
+        {
+            "before": [">"],
+            "commands": ["editor.action.indentLines"]
+        },
+        {
+            "before": ["<"],
+            "commands": ["editor.action.outdentLines"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["p"],
+            "after": ["p", "g", "v", "y"]
+        },
+        { "before": ["leader", "/"], "after": ["y", "/", "<C-r>", "\""] }
+    ],
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": ["#8FBCBB", "#434C5E"],
+    "vim.statusBarColors.insert": "#BF616A",
+    "vim.statusBarColors.visual": "#B48EAD",
+    "vim.statusBarColors.visualline": "#B48EAD",
+    "vim.statusBarColors.visualblock": "#A3BE8C",
+    "vim.statusBarColors.replace": "#D08770",
+    "vim.statusBarColors.commandlineinprogress": "#86f9f7",
+    "vim.statusBarColors.searchinprogressmode": "#87e698",
+    "vim.statusBarColors.easymotionmode": "#87e698",
+    "vim.statusBarColors.easymotioninputmode": "#87e698",
+    "vim.statusBarColors.surroundinputmode": "#87e698",
+    // JSON formatter
+    "[jsonc]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "prettier.tabWidth": 4,
+        "prettier.useTabs": false
+    },
+    // Python-related
+    "notebook.stickyScroll.enabled": true,
+    "mypy-type-checker.args": ["--config-file=pyproject.toml"],
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1,
+        "ms-toolsai.jupyter": 1,
+        "ms-toolsai.jupyter-renderers": 1,
+        "ms-python.python": 1,
+        "ms-python.vscode-pylance": 1
+    },
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.formatOnType": true,
+        "editor.wordBasedSuggestions": "off",
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "python.languageServer": "None",
+    "python.analysis.supportRestructuredText": true,
+    "ruff.nativeServer": true,
+    "jupyter.askForKernelRestart": false,
+    "jupyter.debugJustMyCode": true,
+    "autoDocstring.docstringFormat": "numpy",
+    "autoDocstring.customTemplatePath": "docs/source/docstring/pythmed.mustache",
+    "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
+    "jupyter.logging.level": "debug",
+    "quarto.render.renderOnSave": true,
+    "files.exclude": {
+        "**/.git": false
+    },
+    "remote.SSH.remotePlatform": {
+        "10.113.113.118": "windows",
+        "raspberrypi": "linux",
+        "10.113.112.163": "linux",
+        "physmed": "windows",
+        "192.222.53.168": "linux"
+    },
+    "remote.autoForwardPortsSource": "hybrid",
+    "redhat.telemetry.enabled": true,
+    "notebook.lineNumbers": "on",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#8FBCBB",
+        "statusBar.noFolderBackground": "#8FBCBB",
+        "statusBar.debuggingBackground": "#8FBCBB",
+        "statusBar.foreground": "#434C5E",
+        "statusBar.debuggingForeground": "#434C5E"
+    },
+    "[rust]": {
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true
+    },
+    "githubPullRequests.pullBranch": "never",
+    "github.copilot.enable": {
+        "python": "true"
+    },
+    "breadcrumbs.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "claudeCode.preferredLocation": "panel"
+}
