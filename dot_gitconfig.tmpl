@@ -7,6 +7,7 @@
 
 [core]
     pager = delta
+    longpaths = true
 {{ if eq .chezmoi.os "linux" }}
 {{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
 	sshcommand = /mnt/c/WINDOWS/System32/OpenSSH/ssh.exe
