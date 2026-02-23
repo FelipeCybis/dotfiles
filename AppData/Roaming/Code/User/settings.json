@@ -18,6 +18,10 @@
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.fontSize": 16,
     "window.zoomLevel": 1,
+    "editor.cursorSurroundingLines": 10,
+    "editor.rulers": [88],
+    "editor.renderLineHighlight": "line",
+    "workbench.editor.openSideBySideDirection": "right",
     // Rewrap extension
     "rewrap.autoWrap.enabled": true,
     "rewrap.wrappingColumn": 88,
@@ -33,14 +37,43 @@
     "vim.sneak": true,
     "vim.normalModeKeyBindings": [
         { "before": ["leader", "w"], "commands": [":w!"] },
-        { "before": ["leader", "q"], "commands": [":q!"] },
+        {
+            "before": ["leader", "q"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        },
+        { "before": ["leader", "Q"], "commands": [":q!"] },
         { "before": ["leader", "x"], "commands": [":x!"] },
         {
             "before": ["K"],
             "commands": ["editor.action.showHover"]
+        },
+        {
+            "before": ["leader", "c", "d"],
+            "commands": ["editor.action.showHover"]
+        },
+        {
+            "before": ["leader", "l", "f"],
+            "commands": ["editor.action.formatDocument"]
+        },
+        {
+            "before": ["leader", "e", "e"],
+            "commands": ["workbench.files.action.showActiveFileInExplorer"]
         }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
+        // Scroll half page + center (Neovim-style)
+        { "before": ["<C-d>"], "after": ["<C-d>", "z", "z"] },
+        { "before": ["<C-u>"], "after": ["<C-u>", "z", "z"] },
+        // Center on search match
+        { "before": ["n"], "after": ["n", "z", "z", "z", "v"] },
+        { "before": ["N"], "after": ["N", "z", "z", "z", "v"] },
+        // Visual line movement (respects word wrap)
+        { "before": ["j"], "after": ["g", "j"] },
+        { "before": ["k"], "after": ["g", "k"] },
+        // Yank to system clipboard (explicit, Neovim-style)
+        { "before": ["leader", "y"], "after": ["\"", "+", "y"] },
+        { "before": ["leader", "Y"], "after": ["\"", "+", "Y"] },
+        // Select all
         { "before": ["leader", "a"], "after": ["g", "g", "V", "G"] },
         // Search for the word cursor is in
         {
@@ -110,11 +143,27 @@
         {
             "before": ["leader", "p"],
             "commands": ["editor.action.formatDocument"]
+        },
+        // Replace word globally (Neovim-style <leader>rwg)
+        {
+            "before": ["leader", "r", "w", "g"],
+            "after": [
+                "v", "i", "w", "y", ":",
+                "%", "s", "/", "<C-r>", "\"", "/"
+            ]
+        },
+        // Replace word in current line (Neovim-style <leader>rwl)
+        {
+            "before": ["leader", "r", "w", "l"],
+            "after": [
+                "v", "i", "w", "y", ":",
+                "s", "/", "<C-r>", "\"", "/"
+            ]
         }
     ],
     "vim.visualModeKeyBindings": [
         { "before": ["v"], "after": ["i", "w"] },
-        // repeateadly indent lines
+        // Indent lines keeping selection (Neovim-style)
         {
             "before": [">"],
             "commands": ["editor.action.indentLines"]
@@ -122,14 +171,35 @@
         {
             "before": ["<"],
             "commands": ["editor.action.outdentLines"]
+        },
+        // Move selected lines up/down (Neovim-style)
+        {
+            "before": ["J"],
+            "commands": ["editor.action.moveLinesDownAction"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["editor.action.moveLinesUpAction"]
         }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
+        // Paste without replacing register
         {
             "before": ["p"],
-            "after": ["p", "g", "v", "y"]
+            "after": ["\"", "_", "d", "P"]
         },
-        { "before": ["leader", "/"], "after": ["y", "/", "<C-r>", "\""] }
+        { "before": ["leader", "/"], "after": ["y", "/", "<C-r>", "\""] },
+        // Delete to black hole register (Neovim-style)
+        { "before": ["leader", "d"], "after": ["\"", "_", "d"] },
+        // Yank to system clipboard (explicit, Neovim-style)
+        { "before": ["leader", "y"], "after": ["\"", "+", "y"] },
+        // Replace word globally from visual selection
+        {
+            "before": ["leader", "r", "w", "g"],
+            "after": [
+                "y", ":", "%", "s", "/", "<C-r>", "\"", "/"
+            ]
+        }
     ],
     "vim.statusBarColorControl": true,
     "vim.statusBarColors.normal": ["#8FBCBB", "#434C5E"],
