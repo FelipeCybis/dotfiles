@@ -2,6 +2,7 @@ return {
   {
     "j-hui/fidget.nvim",
     dependencies = {
+      { "neovim/nvim-lspconfig" },
       { "mason-org/mason.nvim", opts = { log_level = vim.log.levels.DEBUG } },
       {
         "mason-org/mason-lspconfig.nvim",
@@ -10,6 +11,7 @@ return {
             "lua_ls",
             "tinymist",
             "harper_ls",
+            "slint_lsp",
           },
           automatic_enable = false,
         }

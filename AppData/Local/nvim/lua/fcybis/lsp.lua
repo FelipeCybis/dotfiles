@@ -1,4 +1,4 @@
-vim.lsp.enable({ "lua_ls", "ty", "ruff", "harper_ls", "tinymist" })
+vim.lsp.enable({ "lua_ls", "ty", "ruff", "harper_ls", "tinymist", "slint_lsp" })
 
 vim.lsp.config("harper_ls", { filetypes = { "typst", "markdown", "gitcommit" } })
 
