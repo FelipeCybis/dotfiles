@@ -251,6 +251,7 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
+    share location="zellij:share"
 }
 
 // Plugins to load in the background when a new session starts
@@ -281,7 +282,7 @@ web_server true
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 // 
-// default_shell "fish"
+// default_shell "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
  
 // Choose the path to override cwd that zellij will use for opening new panes
 // 

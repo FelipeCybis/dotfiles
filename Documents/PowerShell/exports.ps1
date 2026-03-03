@@ -1,4 +1,5 @@
-[System.Environment]::SetEnvironmentVariable('EDITOR','nvim')
+# [System.Environment]::SetEnvironmentVariable('EDITOR','nvim')
+$EDITOR = $env:EDITOR = 'nvim'
 
 if (Get-Command bat -errorAction SilentlyContinue)
 {
@@ -15,4 +16,7 @@ if (Get-Command bat -errorAction SilentlyContinue)
         bat cache --build
     }
 }
-[System.Environment]::SetEnvironmentVariable('BAT_THEME','Catppuccin Frappe')
+# [System.Environment]::SetEnvironmentVariable('BAT_THEME','Catppuccin Frappe')
+$BAT_THEME = $env:BAT_THEME = 'Catppuccin Frappe'
+
+$YAZI_CONFIG_HOME = "$HOME/.config/yazi"                                      
