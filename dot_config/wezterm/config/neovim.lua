@@ -79,16 +79,16 @@ end
 ---@param window Window
 ---@param pane Pane
 local function fullscreen_neovim_compat(window, pane)
-  local is_nvim = pane:get_user_vars().NVIM_WEZTERM
+  -- local is_nvim = pane:get_user_vars().NVIM_WEZTERM
 
-  if is_nvim == "true" then
-    window:perform_action(
-      wezterm.action.Multiple {
-        wezterm.action.SendKey { key = "f", mods = "CTRL" },
-      }, pane)
-  else
-    window:perform_action("TogglePaneZoomState", pane)
-  end
+  -- if is_nvim == "true" then
+  --   window:perform_action(
+  --     wezterm.action.Multiple {
+  --       wezterm.action.SendKey { key = "f", mods = "CTRL" },
+  --     }, pane)
+  -- else
+  window:perform_action("TogglePaneZoomState", pane)
+  -- end
 end
 
 wezterm.on('user-var-changed', function(window, pane, name, value)
