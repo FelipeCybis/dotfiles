@@ -21,6 +21,8 @@ return {
           },
           python = {
             command = { "uv", "run", "--with", "ipython", "ipython", "--no-autoindent" },
+            -- command = { "uv", "run", "--active", "--with", "ipython", "ipython", "--no-autoindent" },
+            -- command = { "ipython", "--no-autoindent" },
             format = require("iron.fts.common").bracketed_paste_python,
             block_deviders = { "# %%", "#%%" },
           },
