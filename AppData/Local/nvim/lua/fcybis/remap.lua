@@ -78,8 +78,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 map("n", "<leader>w", ":w<CR>")
 
 -- Quit buffer faster and quit window
-map("n", "<leader>q", ":bd<CR>")
-map("n", "<leader>Q", ":q<CR>")
+map("n", "<leader>q", ":q<CR>")
+map("n", "<leader>Q", ":bd<CR>")
 
 -- Move cursor to next line even if it is wrapped
 map("n", "j", "gj")
