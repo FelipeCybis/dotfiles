@@ -19,4 +19,8 @@ if (Get-Command bat -errorAction SilentlyContinue)
 # [System.Environment]::SetEnvironmentVariable('BAT_THEME','Catppuccin Frappe')
 $BAT_THEME = $env:BAT_THEME = 'Catppuccin Frappe'
 
-$YAZI_CONFIG_HOME = "$HOME/.config/yazi"                                      
+$YAZI_CONFIG_HOME = "$HOME/.config/yazi"
+
+If (Test-Path "$HOME\miniconda3\Scripts\conda.exe") {
+    (& "$HOME\miniconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
+}
