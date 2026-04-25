@@ -21,6 +21,13 @@ return {
         width = 0.9,
       },
       ui_select = function(fzf_opts, items)
+        local min_h, max_h = 0.15, 0.70
+        local h = (#items + 4) / vim.o.lines
+        if h < min_h then
+          h = min_h
+        elseif h > max_h then
+          h = max_h
+        end
         return vim.tbl_deep_extend("force", fzf_opts, {
           prompt = " ",
           winopts = {
@@ -32,9 +39,9 @@ return {
           },
         }, {
           winopts = {
-            width = 0.5,
-            -- height is number of items, with a max of 80% screen height
-            height = math.floor(math.min(vim.o.lines * 0.8, #items + 2) + 0.5),
+            width = 0.7,
+            row = 0.5,
+            height = h,
           },
         })
       end,
@@ -50,9 +57,6 @@ return {
 
   keys = function()
     local fzf = require("fzf-lua")
-    local fzf_files_local = function()
-      fzf.files({ cwd = vim.fn.expand('%:h') })
-    end
 
     return {
       -- find
