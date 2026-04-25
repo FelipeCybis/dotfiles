@@ -34,8 +34,9 @@ return {
       { '<leader>bs',  function() Snacks.scratch() end,                          desc = '[b]uffer: make [s]cratch' },
       { '<leader>lR',  function() Snacks.rename.rename_file() end,               desc = '[l]SP: [R]ename File' },
       { '<leader>et',  function() Snacks.picker.explorer() end,                  desc = '[e]xplorer: [t]ree' },
-      { '<leader>tt',  function() Snacks.terminal.toggle(shell) end,             desc = '[t]erminal: [t]oggle floating' },
-      { '<leader>ts',  function() Snacks.terminal() end,                         desc = '[t]erminal: [s]plit' },
+      { '<leader>tf',  function() Snacks.terminal.toggle(shell) end,             desc = '[t]erminal: toggle [f]loating' },
+      { '<leader>tt',  function() Snacks.terminal() end,                         desc = '[t]erminal: [t]oggle' },
+      { '<leader>ts',  function() Snacks.terminal.open() end,                    desc = '[t]erminal: [s]plit' },
       { ']n',          function() Snacks.words.jump(vim.v.count1) end,           desc = 'Next Reference (snacks)' },
       { '[n',          function() Snacks.words.jump(-vim.v.count1) end,          desc = 'Prev Reference (snacks)' },
       -- git
