@@ -50,19 +50,19 @@ return {
 
     opts = {
       keymap = {
-        preset = 'none',
-        ['<C-d>'] = { 'show_documentation', 'hide_documentation' },
-        ['<C-e>'] = { 'cancel', 'fallback' },
-        ['<C-y>'] = { 'accept', 'fallback' },
-
-        ['<Up>'] = { 'snippet_forward', 'fallback' },
-        ['<Down>'] = { 'snippet_backward', 'fallback' },
-
-        ['<C-p>'] = { 'select_prev', 'fallback' },
-        ['<C-n>'] = { 'select_next', 'fallback' },
-
-        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+        preset = 'default',
+        -- ['<C-d>'] = { 'show_documentation', 'hide_documentation' },
+        -- ['<C-e>'] = { 'cancel', 'fallback' },
+        -- ['<C-y>'] = { 'accept', 'fallback' },
+        --
+        -- ['<Up>'] = { 'snippet_forward', 'fallback' },
+        -- ['<Down>'] = { 'snippet_backward', 'fallback' },
+        --
+        -- ['<C-p>'] = { 'select_prev', 'fallback' },
+        -- ['<C-n>'] = { 'select_next', 'fallback' },
+        --
+        -- ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+        -- ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
       },
 
       cmdline = {
@@ -85,7 +85,7 @@ return {
         },
       },
       -- experimental signature help support
-      signature = { enabled = true },
+      signature = { enabled = false },
       completion = {
         menu = {
           border = "padded",
