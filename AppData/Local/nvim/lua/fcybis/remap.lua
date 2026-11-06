@@ -25,6 +25,13 @@ map("n", "<leader>y", "\"+y")
 map("v", "<leader>y", "\"+y")
 map("n", "<leader>Y", "\"+Y")
 
+map("x", "<leader>Y", function()
+  vim.cmd('silent normal! "+y')
+  local n = vim.fn.line("'>") - vim.fn.line("'<") + 1
+  vim.fn.setreg("+", vim.trim(vim.fn.substitute(vim.fn.getreg("+"), [[\s*\n\_s*]], " ", "g")))
+  vim.notify(("Copied %d lines as one line"):format(n), vim.log.levels.INFO, { title = "Clipboard" })
+end, { desc = "Yank selection to clipboard as one line" })
+
 -- paste from clipboard
 map("n", "<leader>p", "\"*p")
 map("v", "<leader>p", "\"*p")
